@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 380px;
+  width: 400px;
   background: var(--c-surface);
   border-left: 1px solid var(--c-border);
   box-shadow: var(--shadow-lg);
@@ -23,8 +23,8 @@
 }
 
 .drawer-header {
-  height: 58px;
-  padding: 0 20px;
+  height: 52px;
+  padding: 0 18px;
   border-bottom: 1px solid var(--c-border);
   display: flex;
   align-items: center;
@@ -33,7 +33,7 @@
 
 .drawer-header h3 {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -61,17 +61,48 @@
 
 .drawer-body {
   flex: 1;
-  padding: 20px;
+  padding: 16px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+}
+
+/* 快速筆記工具列 */
+.scratchpad-toolbar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+
+.btn-xs {
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition);
+}
+
+.btn-ai-action {
+  background: var(--c-primary-dim);
+  color: var(--c-primary);
+  border: 1px solid var(--c-primary);
+}
+
+.btn-ai-action:hover {
+  background: var(--c-primary);
+  color: #FAF8F5;
 }
 
 #scratchpad-textarea {
   flex: 1;
   width: 100%;
-  min-height: 250px;
+  min-height: 280px;
   background: var(--c-bg);
   border: 1.5px solid var(--c-border);
   border-radius: var(--radius-md);
@@ -89,9 +120,23 @@
   box-shadow: 0 0 0 3px var(--c-primary-dim);
 }
 
+.scratchpad-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.counter-text {
+  font-size: 0.72rem;
+  color: var(--c-text-dim);
+  font-family: var(--font-number);
+}
+
 .drawer-actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 /* Modal Styles */
@@ -204,4 +249,14 @@
 .pomodoro-settings {
   font-size: 0.78rem;
   color: var(--c-text-muted);
+}
+
+/* 行動裝置 RWD (< 768px) */
+@media (max-width: 768px) {
+  .drawer {
+    width: 100vw !important;
+  }
+  .modal {
+    width: 92vw !important;
+  }
 }

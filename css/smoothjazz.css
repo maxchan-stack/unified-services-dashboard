@@ -128,3 +128,34 @@
   accent-color: var(--c-primary);
   cursor: pointer;
 }
+
+/* 行動裝置 RWD (< 768px) */
+@media (max-width: 768px) {
+  .sticky-radio-player {
+    height: 48px;
+    padding: 0 10px;
+    gap: 8px;
+  }
+  .radio-mini-left {
+    gap: 8px;
+  }
+  .sticky-play-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  .sticky-title, .sticky-status {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .sticky-station-select {
+    max-width: 110px;
+    font-size: 0.72rem;
+    padding: 3px 6px;
+  }
+  .sticky-volume {
+    display: none;
+  }
+}

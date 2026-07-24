@@ -3,7 +3,8 @@
   flex: 1;
   padding: 16px;
   overflow: hidden;
-  height: calc(100vh - 44px - 54px); /* Full Height minus Slim Header and Bottom Radio Player */
+  height: calc(100vh - 44px - 54px);
+  height: calc(100dvh - 44px - 54px);
   position: relative;
   background: var(--c-bg);
 }
@@ -32,4 +33,16 @@
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+/* 行動裝置 RWD (< 768px) */
+@media (max-width: 768px) {
+  .workspace {
+    padding: 6px;
+    height: calc(100vh - 40px - 48px);
+    height: calc(100dvh - 40px - 48px);
+  }
+  .workspace.layout-tab .module-panel {
+    border-radius: var(--radius-md);
+  }
 }
