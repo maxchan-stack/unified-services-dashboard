@@ -5,11 +5,19 @@ const VALID_TABS = ['bulletin', 'gemini', 'google', 'island'];
 export function initSidebar() {
   const sidebar = document.getElementById('sidebar');
   const toggleBtn = document.getElementById('sidebar-toggle-btn');
+  const mobileToggleBtn = document.getElementById('mobile-menu-toggle');
+  const overlay = document.getElementById('modal-overlay');
   const navItems = document.querySelectorAll('.sidebar-nav .nav-item[data-view]');
 
-  // Toggle Collapse
+  // Toggle Collapse (Desktop)
   toggleBtn?.addEventListener('click', () => {
     sidebar?.classList.toggle('collapsed');
+  });
+
+  // Mobile Menu Toggle (Mobile RWD)
+  mobileToggleBtn?.addEventListener('click', () => {
+    sidebar?.classList.add('mobile-open');
+    overlay?.classList.add('active');
   });
 
   // Nav Item Clicks
@@ -24,6 +32,12 @@ export function initSidebar() {
 
       store.set('layoutMode', 'tab');
       store.set('activeTab', view);
+
+      // On Mobile: Close sidebar after selection
+      if (window.innerWidth <= 768) {
+        sidebar?.classList.remove('mobile-open');
+        overlay?.classList.remove('active');
+      }
     });
   });
 

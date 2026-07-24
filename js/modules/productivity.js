@@ -155,6 +155,7 @@ export function initProductivity() {
     scratchpadDrawer.classList.remove('active');
     pomodoroModal.classList.remove('active');
     document.getElementById('settings-drawer')?.classList.remove('active');
+    document.getElementById('sidebar')?.classList.remove('mobile-open');
     overlay.classList.remove('active');
   });
 
