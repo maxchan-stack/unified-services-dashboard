@@ -1,0 +1,139 @@
+/* Gemini AI Chat Module - MUJI Style UI */
+.gemini-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 14px;
+  gap: 10px;
+  background: var(--c-surface);
+}
+
+.gemini-chat-history {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 4px;
+}
+
+.chat-bubble {
+  max-width: 88%;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  background: var(--c-primary);
+  color: #FAF8F5;
+  border-bottom-right-radius: 2px;
+  box-shadow: var(--shadow-sm);
+}
+
+.chat-bubble.ai {
+  align-self: flex-start;
+  background: var(--c-bg);
+  color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-bottom-left-radius: 2px;
+}
+
+.chat-bubble.ai.thinking {
+  color: var(--c-text-dim);
+  font-style: italic;
+}
+
+.chat-bubble code {
+  font-family: var(--font-mono);
+  background: var(--c-surface-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--c-primary);
+}
+
+.chat-bubble pre {
+  background: var(--c-surface-2);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  margin: 8px 0;
+  border: 1px solid var(--c-border);
+}
+
+.trigger-chip-group {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.trigger-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  background: var(--c-primary-dim);
+  color: var(--c-primary);
+  border: 1px solid rgba(26,93,87,0.25);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.trigger-chip:hover {
+  background: var(--c-primary);
+  color: #FAF8F5;
+}
+
+.gemini-quick-prompts {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.prompt-tag {
+  padding: 5px 12px;
+  font-size: 0.76rem;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-full);
+  color: var(--c-text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.prompt-tag:hover {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+  background: var(--c-primary-dim);
+}
+
+.gemini-input-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.gemini-input {
+  flex: 1;
+  background: var(--c-bg);
+  border: 1.5px solid var(--c-border);
+  padding: 9px 14px;
+  border-radius: var(--radius-md);
+  color: var(--c-text);
+  font-size: 0.86rem;
+  transition: var(--transition);
+}
+
+.gemini-input:focus {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px var(--c-primary-dim);
+}

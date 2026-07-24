@@ -1,0 +1,172 @@
+/* Sidebar Layout - MUJI Style */
+.sidebar {
+  width: 230px;
+  height: 100vh;
+  background: var(--c-surface);
+  border-right: 1px solid var(--c-border);
+  display: flex;
+  flex-direction: column;
+  transition: width var(--transition);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.sidebar.collapsed {
+  width: 68px;
+}
+
+.sidebar-header {
+  height: 58px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.logo-icon {
+  font-size: 22px;
+  color: var(--c-primary);
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--c-text);
+  letter-spacing: 0.08em;
+}
+
+.sidebar.collapsed .brand-name {
+  display: none;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 14px 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-section-title {
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-text-dim);
+  padding: 12px 10px 6px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .nav-section-title {
+  display: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  color: var(--c-text-muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+  transition: var(--transition);
+  width: 100%;
+  text-align: left;
+  position: relative;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  letter-spacing: 0.03em;
+}
+
+.nav-item i {
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.nav-item:hover {
+  background: var(--c-primary-dim);
+  color: var(--c-primary);
+  border-color: var(--c-border);
+}
+
+.nav-item.active {
+  background: var(--c-primary-dim);
+  color: var(--c-primary);
+  border-color: rgba(26,93,87,0.3);
+  font-weight: 500;
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: var(--c-primary);
+  border-radius: 0 4px 4px 0;
+}
+
+.sidebar.collapsed .nav-label {
+  display: none;
+}
+
+.nav-badge {
+  margin-left: auto;
+  padding: 2px 6px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  background: var(--c-primary-dim);
+  color: var(--c-primary);
+  border: 1px solid rgba(26,93,87,0.2);
+}
+
+.sidebar.collapsed .nav-badge {
+  display: none;
+}
+
+.sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--c-border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pwa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px;
+  background: var(--c-primary-dim);
+  border: 1px solid rgba(26,93,87,0.2);
+  border-radius: var(--radius-md);
+  color: var(--c-primary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.pwa-btn:hover {
+  background: var(--c-primary);
+  color: #FAF8F5;
+}

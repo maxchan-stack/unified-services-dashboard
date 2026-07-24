@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>行動整合頁面 - MUJI 風格多功能儀表板</title>
+  
+  <!-- PWA Web App Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#6e433b">
+
+  <!-- Google Fonts: Noto Serif TC, Noto Sans TC, Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Remix Icons (via CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Main CSS System (MUJI Morandi Terracotta Cloud Sync v41) -->
+  <link rel="stylesheet" href="css/index.css?v=41">
+  <link rel="stylesheet" href="css/sidebar.css?v=41">
+  <link rel="stylesheet" href="css/header.css?v=41">
+  <link rel="stylesheet" href="css/workspace.css?v=41">
+  <link rel="stylesheet" href="css/smoothjazz.css?v=41">
+  <link rel="stylesheet" href="css/gemini.css?v=41">
+  <link rel="stylesheet" href="css/google.css?v=41">
+  <link rel="stylesheet" href="css/bulletin.css?v=41">
+  <link rel="stylesheet" href="css/island.css?v=41">
+  <link rel="stylesheet" href="css/productivity.css?v=41">
+  <link rel="stylesheet" href="css/settings.css?v=41">
+</head>
+<body class="theme-dark">
+
+  <div id="app" class="app-layout">
+    
+    <!-- 左側控制側邊欄 Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <i class="ri-dashboard-3-line logo-icon"></i>
+          <span class="brand-name">行動整合頁面</span>
+        </div>
+        <button id="sidebar-toggle-btn" class="icon-btn-ghost" title="縮小/展開側邊欄">
+          <i class="ri-menu-fold-line"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">主要服務</div>
+        <button class="nav-item active" data-view="bulletin" id="nav-bulletin">
+          <i class="ri-newspaper-line"></i>
+          <span class="nav-label">高二甲班電子佈告欄</span>
+        </button>
+        <button class="nav-item" data-view="gemini" id="nav-gemini">
+          <i class="ri-brain-line"></i>
+          <span class="nav-label">Gemini AI 助手</span>
+        </button>
+        <button class="nav-item" data-view="google" id="nav-google">
+          <i class="ri-map-pin-2-line"></i>
+          <span class="nav-label">Google 地圖與搜尋</span>
+        </button>
+        <button class="nav-item" data-view="island" id="nav-island">
+          <i class="ri-community-line"></i>
+          <span class="nav-label">島民行政中心</span>
+        </button>
+
+        <div class="nav-section-title">生產力工具</div>
+        <button class="nav-item" id="btn-open-scratchpad">
+          <i class="ri-sticky-note-line"></i>
+          <span class="nav-label">快速筆記</span>
+        </button>
+        <button class="nav-item" id="btn-open-pomodoro">
+          <i class="ri-timer-flash-line"></i>
+          <span class="nav-label">番茄鐘專注</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="nav-item" id="btn-open-settings">
+          <i class="ri-settings-4-line"></i>
+          <span class="nav-label">偏好設定與 API</span>
+        </button>
+        <div id="pwa-install-container" style="display: none;">
+          <button id="pwa-install-btn" class="pwa-btn">
+            <i class="ri-download-cloud-line"></i>
+            <span>安裝為應用程式</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主工作區與頂部導覽 Header & Main Content -->
+    <div class="main-wrapper">
+      
+      <!-- 頂部功能列 Header (極簡 Slim 狀態 + 零登入雲端同步) -->
+      <header id="header" class="header">
+        <div class="header-left">
+          <h1 id="view-title" class="page-title">高二甲班電子佈告欄</h1>
+        </div>
+        <div class="header-right">
+          <div id="cloud-sync-status" class="cloud-sync-status ready" title="100% 免登入之雲端自動即時同步">☁️ 雲端自動同步已就緒</div>
+        </div>
+      </header>
+
+      <!-- 主要工作區 Working Canvas (Focus-First 100% 滿版專注) -->
+      <main id="workspace" class="workspace layout-tab">
+        
+        <!-- Module Panel 1: High School Bulletin Board -->
+        <section id="panel-bulletin" class="module-panel panel-bulletin active-tab" data-module="bulletin">
+          <div class="panel-body" id="bulletin-container">
+            <!-- Bulletin Content JS Rendered -->
+          </div>
+        </section>
+
+        <!-- Module Panel 2: Gemini AI -->
+        <section id="panel-gemini" class="module-panel panel-gemini" data-module="gemini">
+          <div class="panel-body" id="gemini-container">
+            <!-- Gemini Content JS Rendered -->
+          </div>
+        </section>
+
+        <!-- Module Panel 3: Google Maps & Search -->
+        <section id="panel-google" class="module-panel panel-google" data-module="google">
+          <div class="panel-body" id="google-container">
+            <!-- Google Content JS Rendered -->
+          </div>
+        </section>
+
+        <!-- Module Panel 4: Island Resident Admin Center -->
+        <section id="panel-island" class="module-panel panel-island" data-module="island">
+          <div class="panel-body" id="island-container">
+            <!-- Island Content JS Rendered -->
+          </div>
+        </section>
+
+      </main>
+
+      <!-- 全局常駐底部音樂廣播播放列 (Sticky Mini Radio Player) -->
+      <div id="sticky-radio-player" class="sticky-radio-player">
+        <div class="radio-mini-left">
+          <button id="sticky-play-btn" class="sticky-play-btn" title="播放 / 暫停廣播">
+            <i id="sticky-play-icon" class="ri-play-fill"></i>
+          </button>
+          <div class="equalizer-bars" id="sticky-equalizer">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="sticky-meta">
+            <div id="sticky-station-title" class="sticky-title">🎷 SmoothJazz.com Global Radio</div>
+            <div id="sticky-status-text" class="sticky-status">點擊播放，即刻收聽線上廣播</div>
+          </div>
+        </div>
+
+        <div class="radio-mini-right">
+          <select id="sticky-station-select" class="sticky-station-select" title="切換音樂電台頻道">
+            <!-- Dynamic Station Options JS Rendered -->
+          </select>
+          <div class="volume-group sticky-volume">
+            <i class="ri-volume-down-line volume-icon"></i>
+            <input type="range" id="sticky-volume-slider" class="volume-slider" min="0" max="1" step="0.05" value="0.8">
+          </div>
+        </div>
+
+        <audio id="radio-audio-element" preload="none" src="https://smoothjazz.cdnstream1.com/2585_128.mp3"></audio>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Drawers / Modals -->
+
+  <!-- 生產力 - 快速筆記抽屜 Quick Scratchpad Drawer -->
+  <div id="scratchpad-drawer" class="drawer drawer-right">
+    <div class="drawer-header">
+      <h3><i class="ri-sticky-note-line"></i> 快速筆記 (Quick Scratchpad)</h3>
+      <button class="close-drawer-btn" id="close-scratchpad-btn"><i class="ri-close-line"></i></button>
+    </div>
+    <div class="drawer-body">
+      <textarea id="scratchpad-textarea" placeholder="在此輸入隨手筆記，內容將自動儲存..."></textarea>
+      <div class="drawer-actions">
+        <button id="clear-scratchpad-btn" class="btn btn-secondary">清空筆記</button>
+        <button id="copy-scratchpad-btn" class="btn btn-primary">複製筆記內容</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 生產力 - 番茄鐘彈窗 Modal -->
+  <div id="pomodoro-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="ri-timer-flash-line"></i> 番茄鐘專注模式</h3>
+        <button class="close-modal-btn" id="close-pomodoro-modal"><i class="ri-close-line"></i></button>
+      </div>
+      <div class="modal-body pomodoro-body">
+        <div class="timer-ring-container">
+          <svg class="timer-ring" width="200" height="200">
+            <circle class="timer-ring-bg" cx="100" cy="100" r="88" />
+            <circle id="timer-ring-progress" class="timer-ring-progress" cx="100" cy="100" r="88" />
+          </svg>
+          <div class="timer-ring-text">
+            <span id="modal-timer-display" class="timer-digits">25:00</span>
+            <span id="modal-timer-phase" class="timer-phase">工作時間</span>
+          </div>
+        </div>
+        <div class="pomodoro-controls">
+          <button id="pomo-start-btn" class="btn btn-primary btn-lg"><i class="ri-play-fill"></i> 開始專注</button>
+          <button id="pomo-pause-btn" class="btn btn-secondary btn-lg" style="display:none;"><i class="ri-pause-fill"></i> 暫停</button>
+          <button id="pomo-reset-btn" class="btn btn-ghost btn-lg"><i class="ri-restart-line"></i> 重置</button>
+        </div>
+        <div class="pomodoro-settings">
+          <label><input type="checkbox" id="auto-focus-music-check" checked> 開啟專注計時時自動隨機連結音樂廣播電台播放</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 設定面板 Drawer -->
+  <div id="settings-drawer" class="drawer drawer-right">
+    <div class="drawer-header">
+      <h3><i class="ri-settings-4-line"></i> 偏好設定與 API 管理</h3>
+      <button class="close-drawer-btn" id="close-settings-btn"><i class="ri-close-line"></i></button>
+    </div>
+    <div class="drawer-body">
+      
+      <div class="setting-group">
+        <h4><i class="ri-key-2-line"></i> API 金鑰配置</h4>
+        <p class="setting-desc">金鑰將安全存於您的瀏覽器 LocalStorage，絕不上傳至任何伺服器。</p>
+        
+        <div class="field-group">
+          <label for="input-gemini-key">Google Gemini API Key</label>
+          <div class="input-with-btn">
+            <input type="password" id="input-gemini-key" placeholder="貼上 AI Studio 發行的 API Key (AIzaSy...)">
+            <button id="btn-verify-gemini" class="btn btn-secondary btn-sm"><i class="ri-checkbox-circle-line"></i> 驗證 Key</button>
+          </div>
+          <span id="gemini-key-status" class="key-status-text"></span>
+          <small class="field-hint">未輸入時將自動切換為「模擬回應展示模式」。</small>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h4><i class="ri-palette-line"></i> 外觀主題與色彩</h4>
+        <div class="field-group">
+          <label for="select-theme">莫蘭迪 MUJI 質感色彩主題</label>
+          <select id="select-theme">
+            <option value="theme-dark" selected>莫蘭迪陶土粉 (Morandi Terracotta - 預設)</option>
+            <option value="theme-light">莫蘭迪清爽日系白 (Morandi Cream)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h4><i class="ri-database-2-line"></i> 系統備份與重置</h4>
+        <div class="btn-group-row">
+          <button id="btn-export-config" class="btn btn-secondary btn-sm"><i class="ri-download-line"></i> 匯出設定檔</button>
+          <button id="btn-reset-all" class="btn btn-ghost btn-sm text-danger"><i class="ri-refresh-line"></i> 重置全站</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay"></div>
+
+  <!-- JavaScript Modules -->
+  <script type="module" src="js/app.js?v=41"></script>
+</body>
+</html>

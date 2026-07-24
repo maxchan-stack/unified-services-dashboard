@@ -1,0 +1,246 @@
+/* ==========================================================================
+   MUJI 無印良品風格設計系統 (MUJI Design System)
+   與「導師電子布告欄」相同之莫蘭迪苔綠色調、精緻紋理與極簡開闊美學
+   ========================================================================== */
+:root {
+  /* MUJI 莫蘭迪陶土粉色彩系統 (Option 5: Morandi Terracotta) */
+  --c-bg:           #f8f4f3;
+  --c-surface:      #FFFFFF;
+  --c-surface-2:    #f2e9e7;
+  --c-surface-3:    #e6d6d2;
+  --c-border:       #e4d5d2;
+  --c-border-hover: #6e433b;
+  --c-text:         #2c2220;
+  --c-text-muted:   #7a625d;
+  --c-text-dim:     #9b847f;
+  --c-primary:      #6e433b; /* 莫蘭迪風化陶土色 */
+  --c-primary-dark: #58342d;
+  --c-primary-hover: rgba(110,67,59,0.25);
+  --c-primary-dim:  rgba(110,67,59,0.1);
+
+  --c-spotify:      #1ed760;
+  --c-youtube:      #ff3333;
+  --c-gemini:       #c06c58;
+  --c-google:       #d97757;
+
+  --radius-sm:      4px;
+  --radius-md:      8px;
+  --radius-lg:      12px;
+  --radius-full:    9999px;
+
+  --shadow-sm:      0 1px 3px rgba(44,34,32,0.08);
+  --shadow-card:    0 2px 10px rgba(44,34,32,0.09);
+  --shadow-lg:      0 6px 28px rgba(44,34,32,0.14);
+
+  --transition:     0.18s ease;
+
+  --font-serif:     'Noto Serif TC', serif;
+  --font-sans:      'Noto Sans TC', -apple-system, sans-serif;
+  --font-number:    'Outfit', 'Inter', sans-serif;
+  --font-mono:      'JetBrains Mono', monospace;
+
+  /* 無印良品網格微紋理背景 */
+  --bg-image: 
+    repeating-linear-gradient(0deg, rgba(110, 67, 59, 0.035) 0px, rgba(110, 67, 59, 0.035) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(110, 67, 59, 0.035) 0px, rgba(110, 67, 59, 0.035) 1px, transparent 1px, transparent 4px),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.85) 0%, rgba(248, 244, 243, 0.4) 100%);
+}
+
+/* 深色模式變更 - 暖陶黑與灰玫瑰陶色 */
+body.theme-dark {
+  --c-bg:           #1a1413;
+  --c-surface:      #241c1b;
+  --c-surface-2:    #302524;
+  --c-surface-3:    #3e302e;
+  --c-border:       #423331;
+  --c-border-hover: #d49a8f;
+  --c-text:         #f3edea;
+  --c-text-muted:   #ba9f99;
+  --c-text-dim:     #8c736e;
+  --c-primary:      #d49a8f; /* 灰玫瑰風化陶土 */
+  --c-primary-dark: #b87e73;
+  --c-primary-dim:  rgba(212,154,143,0.15);
+  --bg-image: 
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 4px),
+    radial-gradient(circle at 50% 50%, rgba(36, 28, 27, 0.9) 0%, rgba(26, 20, 19, 0.95) 100%);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  background-color: var(--c-bg);
+  background-image: var(--bg-image);
+  color: var(--c-text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* MUJI 風格按鈕 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.btn-primary {
+  background: var(--c-primary);
+  color: #FAF8F5;
+  border-color: var(--c-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: var(--c-primary-dark);
+  border-color: var(--c-primary-dark);
+}
+
+.btn-secondary {
+  background: var(--c-surface);
+  color: var(--c-text);
+  border-color: var(--c-border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+  background: var(--c-primary-dim);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--c-text-muted);
+  border-color: var(--c-border);
+}
+
+.btn-ghost:hover {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+  background: var(--c-primary-dim);
+}
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 0.78rem;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  color: var(--c-text-muted);
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+.icon-btn:hover {
+  background: var(--c-primary-dim);
+  color: var(--c-primary);
+  border-color: var(--c-border);
+}
+
+.icon-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  color: var(--c-text-muted);
+  transition: var(--transition);
+}
+.icon-btn-ghost:hover {
+  background: var(--c-primary-dim);
+  color: var(--c-primary);
+}
+
+/* MUJI 風格表單元件 */
+input, select, textarea {
+  width: 100%;
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-md);
+  color: var(--c-text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  padding: 8px 12px;
+  transition: var(--transition);
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px var(--c-primary-dim);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(20, 32, 30, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 900;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--c-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-text-dim);
+}

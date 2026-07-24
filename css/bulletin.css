@@ -1,0 +1,62 @@
+/* Bulletin Board Module Styles - MUJI Theme */
+.bulletin-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 14px;
+  gap: 10px;
+  background: var(--c-surface);
+}
+
+.bulletin-nav-bar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.bulletin-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--c-text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.bulletin-tab-btn:hover {
+  background: var(--c-primary-dim);
+  color: var(--c-primary);
+  border-color: var(--c-primary);
+}
+
+.bulletin-tab-btn.active {
+  background: var(--c-primary);
+  color: #FAF8F5;
+  font-weight: 500;
+  border-color: var(--c-primary);
+}
+
+.bulletin-embed-container {
+  flex: 1;
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.bulletin-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

@@ -1,0 +1,130 @@
+/* Sticky Radio Player Bar Styles - MUJI Morandi Theme */
+.sticky-radio-player {
+  height: 54px;
+  padding: 0 20px;
+  background: var(--c-surface);
+  border-top: 1px solid var(--c-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 100;
+  flex-shrink: 0;
+  box-shadow: 0 -2px 10px rgba(44, 34, 32, 0.05);
+}
+
+.radio-mini-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sticky-play-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--c-primary);
+  color: #FAF8F5;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(110,67,59,0.2);
+}
+
+.sticky-play-btn:hover {
+  transform: scale(1.05);
+  background: var(--c-primary-dark);
+}
+
+.sticky-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sticky-title {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--c-text);
+  white-space: nowrap;
+}
+
+.sticky-status {
+  font-size: 0.7rem;
+  color: var(--c-text-muted);
+}
+
+/* 等化器動畫 */
+.equalizer-bars {
+  display: flex;
+  gap: 3px;
+  height: 14px;
+  align-items: flex-end;
+}
+
+.equalizer-bars span {
+  width: 3px;
+  height: 3px;
+  background: var(--c-primary);
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.equalizer-bars.playing span {
+  animation: eqBounce 1s infinite alternate ease-in-out;
+}
+
+.equalizer-bars.playing span:nth-child(1) { animation-delay: 0.1s; }
+.equalizer-bars.playing span:nth-child(2) { animation-delay: 0.3s; }
+.equalizer-bars.playing span:nth-child(3) { animation-delay: 0.2s; }
+.equalizer-bars.playing span:nth-child(4) { animation-delay: 0.4s; }
+.equalizer-bars.playing span:nth-child(5) { animation-delay: 0.15s; }
+
+@keyframes eqBounce {
+  0% { height: 3px; }
+  100% { height: 14px; }
+}
+
+.radio-mini-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sticky-station-select {
+  padding: 5px 10px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  color: var(--c-text);
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+  max-width: 260px;
+}
+
+.sticky-station-select:hover {
+  border-color: var(--c-primary);
+}
+
+.sticky-volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.volume-icon {
+  font-size: 15px;
+  color: var(--c-text-muted);
+}
+
+.volume-slider {
+  width: 70px;
+  accent-color: var(--c-primary);
+  cursor: pointer;
+}

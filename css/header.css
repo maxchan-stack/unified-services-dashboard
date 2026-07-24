@@ -1,0 +1,54 @@
+/* Header Navbar Styles - Slim Focus-First Style */
+.header {
+  height: 44px;
+  padding: 0 20px;
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 90;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--c-text);
+  letter-spacing: 0.05em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cloud-sync-status {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--c-primary-dim);
+  color: var(--c-primary);
+  border: 1px solid rgba(110,67,59,0.2);
+  transition: var(--transition);
+  user-select: none;
+}
+
+.cloud-sync-status.syncing {
+  opacity: 0.8;
+  animation: pulse 1.2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
