@@ -4,8 +4,8 @@
   "description": "整合 Spotify, YouTube, Gemini AI, Google Maps, 電子佈告欄, 島民行政中心之多功能 PWA 工作區儀表板",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f4f6f7",
-  "theme_color": "#1a5d57",
+  "background_color": "#12181e",
+  "theme_color": "#4a6b82",
   "orientation": "any",
   "icons": [
     {
