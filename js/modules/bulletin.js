@@ -36,7 +36,7 @@ export function initBulletin() {
         </button>
       </div>
 
-      <!-- 高二甲班電子佈告欄無縫內嵌主視窗 -->
+      <!-- 214 班電子佈告欄無縫內嵌主視窗 -->
       <div class="bulletin-embed-container">
         <iframe id="bulletin-iframe"
                 class="bulletin-iframe"

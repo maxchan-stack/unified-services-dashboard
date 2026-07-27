@@ -6,7 +6,7 @@ export function initHeader() {
   store.subscribe((key, val, state) => {
     if (key === 'activeTab') {
       const titleMap = {
-        bulletin: '高二甲班電子佈告欄',
+        bulletin: '214 班電子佈告欄',
         gemini: 'Gemini AI 助手',
         google: 'Google 地圖與搜尋',
         island: '島民行政中心'

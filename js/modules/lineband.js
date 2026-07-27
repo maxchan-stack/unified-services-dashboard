@@ -7,7 +7,7 @@ export function initLineBand() {
   if (!container) return;
 
   const savedBandUrl = store.get('lineBandUrl') || DEFAULT_BAND_URL;
-  const savedBandName = store.get('lineBandName') || '高二甲班 BAND 社群';
+  const savedBandName = store.get('lineBandName') || '214 班 BAND 社群';
 
   container.innerHTML = `
     <div class="lineband-wrapper">
@@ -35,7 +35,7 @@ export function initLineBand() {
       <div id="band-config-panel" class="band-config-panel" style="display: none;">
         <div class="field-row">
           <label for="input-band-name">社群名稱：</label>
-          <input type="text" id="input-band-name" class="band-input" value="${savedBandName}" placeholder="例如: 高二甲班家長與學生群">
+          <input type="text" id="input-band-name" class="band-input" value="${savedBandName}" placeholder="例如: 214 班家長與學生群">
         </div>
         <div class="field-row">
           <label for="input-band-url">BAND 專屬網址：</label>
@@ -86,7 +86,7 @@ export function initLineBand() {
   });
 
   saveBtn?.addEventListener('click', () => {
-    const newName = nameInput.value.trim() || '高二甲班 BAND 社群';
+    const newName = nameInput.value.trim() || '214 班 BAND 社群';
     let newUrl = urlInput.value.trim() || DEFAULT_BAND_URL;
     if (!newUrl.startsWith('http')) newUrl = 'https://' + newUrl;
 
@@ -102,7 +102,7 @@ export function initLineBand() {
 
   function renderTab(tabKey) {
     const currentUrl = store.get('lineBandUrl') || DEFAULT_BAND_URL;
-    const currentName = store.get('lineBandName') || '高二甲班 BAND 社群';
+    const currentName = store.get('lineBandName') || '214 班 BAND 社群';
 
     tabBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === tabKey));
 
@@ -111,14 +111,14 @@ export function initLineBand() {
         <div class="band-card-list">
           <div class="band-notice-card">
             <div class="notice-badge">📌 導師置頂</div>
-            <div class="notice-title">高二甲班 LINE BAND 班級社群動態看板已同步</div>
+            <div class="notice-title">214 班 LINE BAND 班級社群動態看板已同步</div>
             <div class="notice-body">歡迎家長與學生關注 BAND 貼文！班級每週考察日程、行事曆與各科學習資源均會在此同步更新。</div>
             <div class="notice-footer">發布時間: 今日 08:30 | 來源: ${currentName}</div>
           </div>
           <div class="band-notice-card">
             <div class="notice-badge info">ℹ️ 班級提醒</div>
             <div class="notice-title">下週一第一次定時評量考程與複習範圍</div>
-            <div class="notice-body">請同學至「高二甲班電子佈告欄」或 BAND 檢視詳細考程表與各科注意事項。</div>
+            <div class="notice-body">請同學至「214 班電子佈告欄」或 BAND 檢視詳細考程表與各科注意事項。</div>
             <div class="notice-footer">發布時間: 昨日 17:00 | 來源: 教務組</div>
           </div>
         </div>
@@ -187,7 +187,7 @@ export function initLineBand() {
 
   lineShareBtn?.addEventListener('click', () => {
     const currentUrl = store.get('lineBandUrl') || DEFAULT_BAND_URL;
-    const currentName = store.get('lineBandName') || '高二甲班 BAND 社群';
+    const currentName = store.get('lineBandName') || '214 班 BAND 社群';
     const text = encodeURIComponent(`【${currentName}】\n點擊查看 BAND 班級社群：${currentUrl}`);
     window.open(`https://line.me/R/share?text=${text}`, '_blank');
   });
