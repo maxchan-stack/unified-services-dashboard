@@ -2,21 +2,30 @@ import { store } from '../store.js';
 import { eventBus } from '../utils/helpers.js';
 
 const RADIO_STREAMS = [
-  // 🎷 Smooth Jazz 順暢爵士區
-  { id: 'smoothjazz-global', name: '🎷 SmoothJazz.com Global Radio', url: 'https://smoothjazz.cdnstream1.com/2585_128.mp3', category: 'jazz', tag: 'Smooth Jazz', desc: '全球第一 Smooth Jazz 24 小時廣播電台' },
-  { id: 'smoothjazz-klassik', name: '🎷 Klassik Smooth Jazz (德系爵士)', url: 'https://stream.klassikradio.de/smooth/mp3-192', category: 'jazz', tag: 'Smooth Jazz', desc: '高品質 192kbps 柔順爵士廣播頻道' },
-  { id: 'smoothjazz-florida', name: '🎷 Smooth Jazz Florida (佛羅里達)', url: 'https://smoothjazz.cdnstream1.com/2586_128.mp3', category: 'jazz', tag: 'Smooth Jazz', desc: '美式陽光悠閒爵士樂頻道' },
-  
-  // 🎹 Classical & Solo Piano 古典鋼琴區
-  { id: 'piano-klassik', name: '🎹 Klassik Radio Piano (古典鋼琴)', url: 'https://stream.klassikradio.de/piano/mp3-192', category: 'piano', tag: '古典鋼琴', desc: '192kbps 高音質鋼琴獨奏與大師作品' },
-  { id: 'lounge-piano', name: '🎹 FFH Piano & Lounge (鋼琴沙發樂)', url: 'https://mp3.ffh.de/ffhchannels/hqlounge.mp3', category: 'piano', tag: '古典鋼琴', desc: '柔和獨奏鋼琴與放鬆純樂器演奏' },
-  
-  // 🍃 Light Music & Mellow 輕音樂專注區
-  { id: 'mellow-rp', name: '🍃 Radio Paradise Mellow (專注純音樂)', url: 'https://stream.radioparadise.com/mellow-128', category: 'mellow', tag: '專注輕音樂', desc: '無廣告、工作專注與吉他純樂器輕音樂' },
-  
-  // 🍸 Lounge & Bossa Nova 舒壓沙發樂區
-  { id: 'lounge-klassik', name: '🍸 Klassik Radio Lounge (高級沙發樂)', url: 'https://stream.klassikradio.de/lounge/mp3-192', category: 'lounge', tag: '舒壓沙發樂', desc: '192kbps Lounge & Chillout 舒壓電台' },
-  { id: 'bossa-rp', name: '🍸 Radio Paradise Global (Bossa Nova)', url: 'https://stream.radioparadise.com/eclectic-128', category: 'lounge', tag: 'Bossa Nova', desc: '融合 Bossa Nova 與異國風情輕快爵士' }
+  // 🎷 順暢爵士與沙發樂 (Smooth Jazz & Lounge)
+  { id: 'smoothjazz-global', name: '🎷 SmoothJazz.com Global Radio', url: 'https://smoothjazz.cdnstream1.com/2585_128.mp3', group: '🎷 順暢爵士與沙發樂', desc: '全球第一 Smooth Jazz 24 小時廣播電台' },
+  { id: 'smoothjazz-klassik', name: '🎷 Klassik Smooth Jazz (德系高音質)', url: 'https://stream.klassikradio.de/smooth/mp3-192', group: '🎷 順暢爵士與沙發樂', desc: '高品質 192kbps 柔順爵士廣播頻道' },
+  { id: 'smoothjazz-florida', name: '🎷 Smooth Jazz Florida (美式爵士)', url: 'https://smoothjazz.cdnstream1.com/2586_128.mp3', group: '🎷 順暢爵士與沙發樂', desc: '美式陽光悠閒爵士樂頻道' },
+  { id: 'lounge-klassik', name: '🍸 Klassik Radio Lounge (高級沙發樂)', url: 'https://stream.klassikradio.de/lounge/mp3-192', group: '🎷 順暢爵士與沙發樂', desc: '192kbps Lounge & Chillout 舒壓電台' },
+
+  // 🎧 Lofi & Chill 放鬆專注 (Lofi Beats)
+  { id: 'lofi-girl-relay', name: '🎧 Lofi Girl Chill Beats (放鬆學習)', url: 'https://stream.zeno.fm/f3wvbbqmdg8uv', group: '🎧 Lofi & Chill 放鬆專注', desc: '工作、閱讀與編程專用 24h Lofi 音樂' },
+  { id: 'chillhop-radio', name: '☕ Chillhop Radio (專注節奏樂)', url: 'https://stream.zeno.fm/0r0xa792kwzuv', group: '🎧 Lofi & Chill 放鬆專注', desc: '極簡輕快 Hip-Hop 節奏音樂' },
+
+  // 📻 SomaFM 全球免登入電台 (SomaFM Stations)
+  { id: 'somafm-groovesalad', name: '🥗 SomaFM Groove Salad (輕柔電子)', url: 'https://ice1.somafm.com/groovesalad-128-mp3', group: '📻 SomaFM 免登入電台', desc: '全球知名無廣告 Ambient & Chill 串流' },
+  { id: 'somafm-secretagent', name: '🕵️ SomaFM Secret Agent (爵士電影)', url: 'https://ice1.somafm.com/secretagent-128-mp3', group: '📻 SomaFM 免登入電台', desc: '間諜電影原聲與復古爵士風格樂' },
+  { id: 'somafm-chill', name: '❄️ SomaFM Chillout (舒壓氛圍)', url: 'https://ice1.somafm.com/chill-128-mp3', group: '📻 SomaFM 免登入電台', desc: '放鬆心靈與沉浸式純音樂' },
+  { id: 'somafm-lush', name: '🌸 SomaFM Lush (美聲感官輕音樂)', url: 'https://ice1.somafm.com/lush-128-mp3', group: '📻 SomaFM 免登入電台', desc: '溫柔舒適的純人聲與輕音樂' },
+
+  // 🎹 古典鋼琴與獨奏 (Piano & Classical)
+  { id: 'piano-klassik', name: '🎹 Klassik Radio Piano (古典鋼琴)', url: 'https://stream.klassikradio.de/piano/mp3-192', group: '🎹 古典鋼琴與獨奏', desc: '192kbps 高音質鋼琴獨奏與大師作品' },
+  { id: 'lounge-piano', name: '🎹 FFH Piano & Lounge (鋼琴沙發樂)', url: 'https://mp3.ffh.de/ffhchannels/hqlounge.mp3', group: '🎹 古典鋼琴與獨奏', desc: '柔和獨奏鋼琴與放鬆純樂器演奏' },
+
+  // 🍃 專注純音樂與搖滾 (Radio Paradise)
+  { id: 'mellow-rp', name: '🍃 Radio Paradise Mellow (專注純樂器)', url: 'https://stream.radioparadise.com/mellow-128', group: '🍃 專注純音樂與搖滾', desc: '無廣告、工作專注與吉他純樂器輕音樂' },
+  { id: 'main-rp', name: '🎸 Radio Paradise Main Mix (多元混合)', url: 'https://stream.radioparadise.com/mp3-128', group: '🍃 專注純音樂與搖滾', desc: '高音質多元音樂調和廣播串流' },
+  { id: 'rock-rp', name: '🎸 Radio Paradise Rock (搖滾音樂頻譜)', url: 'https://stream.radioparadise.com/rock-128', group: '🍃 專注純音樂與搖滾', desc: '搖滾與動感原聲頻譜' }
 ];
 
 export function initSmoothJazz() {
@@ -34,11 +43,15 @@ export function initSmoothJazz() {
 
   let isPlaying = false;
 
-  // Render Select Options
+  // Render Select Options with Grouping
   if (selectEl) {
-    selectEl.innerHTML = RADIO_STREAMS.map(s => `
-      <option value="${s.url}">${s.name}</option>
-    `).join('');
+    const groups = [...new Set(RADIO_STREAMS.map(s => s.group))];
+    selectEl.innerHTML = groups.map(groupName => {
+      const items = RADIO_STREAMS.filter(s => s.group === groupName);
+      return `<optgroup label="${groupName}">
+        ${items.map(s => `<option value="${s.url}">${s.name}</option>`).join('')}
+      </optgroup>`;
+    }).join('');
 
     const savedUrl = store.get('radioStreamUrl') || RADIO_STREAMS[0].url;
     selectEl.value = savedUrl;
