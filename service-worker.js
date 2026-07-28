@@ -1,4 +1,4 @@
-const CACHE_NAME = 'omnihub-shell-v45';
+const CACHE_NAME = 'omnihub-shell-v46';
 const STATIC_ASSETS = [
   './',
   './index.html',

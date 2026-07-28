@@ -86,6 +86,11 @@ export function initProductivity() {
     pomoPauseBtn.style.display = 'inline-flex';
     if (headerToggle) headerToggle.innerHTML = '<i class="ri-pause-fill"></i>';
 
+    // 專注階段自動連線隨機電台並播放
+    if (isWorkPhase) {
+      eventBus.emit('play-random-radio');
+    }
+
     timerInterval = setInterval(() => {
       remainingSeconds--;
       updateTimerDisplays();
