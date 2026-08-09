@@ -1,11 +1,10 @@
 import { store } from '../store.js';
 
-// ADMIN_SECRET 為 'a8b414c024b8'，帶入 URL 參數 ?admin=a8b414c024b8 即可自動完成管理員密鑰填入與驗證
 const BULLETIN_PORTALS = {
   bulletin: 'https://maxchan-stack.github.io/bulletin-board-web/bulletin.html',
   student: 'https://maxchan-stack.github.io/bulletin-board-web/index.html',
   parent: 'https://maxchan-stack.github.io/bulletin-board-web/parent.html',
-  admin: 'https://maxchan-stack.github.io/bulletin-board-web/admin.html?admin=a8b414c024b8'
+  admin: 'https://maxchan-stack.github.io/bulletin-board-web/admin.html'
 };
 
 export function initBulletin() {
@@ -53,7 +52,24 @@ export function initBulletin() {
   const reloadBtn = document.getElementById('bulletin-reload-btn');
 
   function switchPortal(portalKey) {
-    const targetUrl = BULLETIN_PORTALS[portalKey] || BULLETIN_PORTALS.bulletin;
+    let targetUrl = BULLETIN_PORTALS[portalKey] || BULLETIN_PORTALS.bulletin;
+
+    // 導師發布台需提示手動輸入管理員密碼
+    if (portalKey === 'admin') {
+      const savedSecret = localStorage.getItem('bulletin_admin_secret');
+      if (savedSecret) {
+        targetUrl += `?admin=${encodeURIComponent(savedSecret)}`;
+      } else {
+        const secret = prompt('請輸入導師發布台管理密碼：');
+        if (secret) {
+          localStorage.setItem('bulletin_admin_secret', secret);
+          targetUrl += `?admin=${encodeURIComponent(secret)}`;
+        } else {
+          return;
+        }
+      }
+    }
+
     iframe.src = targetUrl;
     store.set('bulletinPortal', portalKey);
 

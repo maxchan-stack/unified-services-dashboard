@@ -24,7 +24,7 @@ export class CloudSyncService {
     const debouncedSave = debounce(() => this.uploadCloudData(), 1200);
 
     store.subscribe((key) => {
-      if (key === 'scratchpadContent' || key === 'apiKeys' || key === 'radioStreamUrl') {
+      if (key === 'scratchpadContent' || key === 'radioStreamUrl') {
         this.updateStatus('⏳ 正在備份至雲端...', 'syncing');
         debouncedSave();
       }
@@ -63,10 +63,6 @@ export class CloudSyncService {
             if (textarea) textarea.value = cloudData.scratchpadContent;
           }
 
-          if (cloudData.apiKeys) {
-            store.updateApiKeys(cloudData.apiKeys);
-          }
-
           console.log('[CloudSync] 雲端資料已自動完成即時同步。');
           this.updateStatus('☁️ 雲端資料已自動同步', 'ready');
         }
@@ -87,7 +83,6 @@ export class CloudSyncService {
     const payload = {
       updatedAt: new Date().toISOString(),
       scratchpadContent: store.get('scratchpadContent') || '',
-      apiKeys: store.get('apiKeys') || {},
       radioStreamUrl: store.get('radioStreamUrl') || ''
     };
 

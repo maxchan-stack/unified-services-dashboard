@@ -27,10 +27,23 @@ export function formatTime(seconds) {
   return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
+// HTML Entity Escape（防止 XSS 注入）
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
 // Simple Markdown Formatter
 export function parseMarkdown(text) {
   if (!text) return '';
-  return text
+  let escaped = escapeHtml(text);
+  return escaped
     .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')

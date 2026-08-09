@@ -75,12 +75,18 @@ export function initGemini() {
       scrollToBottom();
 
       try {
+        // 將對話歷史轉換為 Gemini API 的 contents 格式
+        const contents = history.map(entry => ({
+          role: entry.role === 'ai' ? 'model' : 'user',
+          parts: [{ text: entry.text }]
+        }));
+
         const res = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`,
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: userText }] }] })
+            body: JSON.stringify({ contents })
           }
         );
 
