@@ -78,10 +78,13 @@ export function initProductivity() {
     }
   }
 
+  const ringContainer = document.querySelector('.timer-ring-container');
+
   function startTimer() {
     if (isRunning) return;
     isRunning = true;
 
+    ringContainer?.classList.add('is-running');
     pomoStartBtn.style.display = 'none';
     pomoPauseBtn.style.display = 'inline-flex';
     if (headerToggle) headerToggle.innerHTML = '<i class="ri-pause-fill"></i>';
@@ -98,6 +101,7 @@ export function initProductivity() {
       if (remainingSeconds <= 0) {
         clearInterval(timerInterval);
         isRunning = false;
+        ringContainer?.classList.remove('is-running');
         
         if (isWorkPhase) {
           alert('專注時間結束！休息 5 分鐘。');
@@ -123,6 +127,7 @@ export function initProductivity() {
     if (!isRunning) return;
     clearInterval(timerInterval);
     isRunning = false;
+    ringContainer?.classList.remove('is-running');
     pomoStartBtn.style.display = 'inline-flex';
     pomoPauseBtn.style.display = 'none';
     if (headerToggle) headerToggle.innerHTML = '<i class="ri-play-fill"></i>';

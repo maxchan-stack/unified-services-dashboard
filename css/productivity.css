@@ -196,6 +196,52 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  transition: box-shadow 0.5s ease;
+}
+
+/* 番茄鐘倒數執行中：沉浸式莫蘭迪呼吸燈效果 */
+.timer-ring-container.is-running {
+  animation: timer-pulse-glow 3.6s ease-in-out infinite;
+}
+
+.timer-ring-container.is-running .timer-ring-progress {
+  animation: timer-progress-breath 3.6s ease-in-out infinite;
+}
+
+.timer-ring-container.is-running .timer-digits {
+  animation: timer-digits-glow 3.6s ease-in-out infinite;
+}
+
+@keyframes timer-pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(74, 107, 130, 0.1), 0 0 15px 2px rgba(74, 107, 130, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(74, 107, 130, 0.05), 0 0 35px 10px rgba(74, 107, 130, 0.45);
+  }
+}
+
+@keyframes timer-progress-breath {
+  0%, 100% {
+    stroke-opacity: 0.8;
+    filter: drop-shadow(0 0 2px rgba(74, 107, 130, 0.3));
+  }
+  50% {
+    stroke-opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(74, 107, 130, 0.8));
+  }
+}
+
+@keyframes timer-digits-glow {
+  0%, 100% {
+    opacity: 0.9;
+    text-shadow: 0 0 0px transparent;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 12px rgba(74, 107, 130, 0.5);
+  }
 }
 
 .timer-ring {
