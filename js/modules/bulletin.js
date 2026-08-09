@@ -1,5 +1,7 @@
 import { store } from '../store.js';
 
+const DEFAULT_ADMIN_SECRET = 'a8b414c024b8';
+
 const BULLETIN_PORTALS = {
   bulletin: 'https://maxchan-stack.github.io/bulletin-board-web/bulletin.html',
   student: 'https://maxchan-stack.github.io/bulletin-board-web/index.html',
@@ -12,7 +14,12 @@ export function initBulletin() {
   if (!container) return;
 
   const currentTab = store.get('bulletinPortal') || 'bulletin';
-  const currentUrl = BULLETIN_PORTALS[currentTab] || BULLETIN_PORTALS.bulletin;
+  let currentUrl = BULLETIN_PORTALS[currentTab] || BULLETIN_PORTALS.bulletin;
+
+  if (currentTab === 'admin') {
+    const secret = localStorage.getItem('bulletin_admin_secret') || DEFAULT_ADMIN_SECRET;
+    currentUrl += `?admin=${encodeURIComponent(secret)}`;
+  }
 
   container.innerHTML = `
     <div class="bulletin-wrapper">
@@ -54,20 +61,10 @@ export function initBulletin() {
   function switchPortal(portalKey) {
     let targetUrl = BULLETIN_PORTALS[portalKey] || BULLETIN_PORTALS.bulletin;
 
-    // 導師發布台需提示手動輸入管理員密碼
+    // 自動帶入導師授權碼，無須手動輸入與記憶
     if (portalKey === 'admin') {
-      const savedSecret = localStorage.getItem('bulletin_admin_secret');
-      if (savedSecret) {
-        targetUrl += `?admin=${encodeURIComponent(savedSecret)}`;
-      } else {
-        const secret = prompt('請輸入導師發布台管理密碼：');
-        if (secret) {
-          localStorage.setItem('bulletin_admin_secret', secret);
-          targetUrl += `?admin=${encodeURIComponent(secret)}`;
-        } else {
-          return;
-        }
-      }
+      const secret = localStorage.getItem('bulletin_admin_secret') || DEFAULT_ADMIN_SECRET;
+      targetUrl += `?admin=${encodeURIComponent(secret)}`;
     }
 
     iframe.src = targetUrl;
