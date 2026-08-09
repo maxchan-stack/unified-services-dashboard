@@ -35,6 +35,25 @@
   gap: 12px;
 }
 
+.sheets-shortcut-select {
+  padding: 4px 10px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  background: var(--c-surface-2);
+  color: var(--c-primary);
+  border: 1.5px solid var(--c-border);
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+  max-width: 170px;
+}
+
+.sheets-shortcut-select:hover {
+  border-color: var(--c-primary);
+  background: var(--c-primary-dim);
+}
+
 .cloud-sync-status {
   font-size: 0.72rem;
   font-weight: 500;
