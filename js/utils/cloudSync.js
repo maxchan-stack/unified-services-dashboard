@@ -2,10 +2,10 @@ import { store } from '../store.js';
 import { debounce, eventBus } from './helpers.js';
 
 /**
- * 100% 零帳號登入、零 Google 權限阻擋之「公用匿名雲端自動同步」模組
+ * 本機高效率儲存與自訂雲端自動同步模組
  */
-const CLOUD_STORE_URL = 'https://api.jsonbin.io/v3/b/6695a74ee41b4d34e4125b20';
-const ACCESS_KEY = '$2a$10$X8t3oW/nJ5tYfO8gU9zNye2C9hL7V8k.2b5.Kz1Q6V0Y8X9Z.a5uO'; // 公用匿名讀寫 API Key
+const CLOUD_STORE_URL = store.get('cloudStoreUrl') || '';
+const ACCESS_KEY = store.get('cloudAccessKey') || '';
 
 export class CloudSyncService {
   constructor() {
@@ -15,9 +15,13 @@ export class CloudSyncService {
 
   init() {
     this.statusElement = document.getElementById('cloud-sync-status');
-    this.updateStatus('☁️ 雲端自動同步已就緒', 'ready');
+    
+    if (!CLOUD_STORE_URL) {
+      this.updateStatus('🏠 使用本機儲存 (LocalStorage)', 'ready');
+      return;
+    }
 
-    // 頁面載入時：自動嘗試從雲端下載最新資料
+    this.updateStatus('☁️ 雲端自動同步已就緒', 'ready');
     this.downloadCloudData();
 
     // 監聽 Store 變化，停止輸入 1.2 秒後自動靜默上傳
@@ -41,15 +45,15 @@ export class CloudSyncService {
 
   // 1. 自動從雲端拉取最新資料
   async downloadCloudData() {
+    if (!CLOUD_STORE_URL) return;
+
     try {
       this.updateStatus('⏳ 正在比對雲端資料...', 'syncing');
 
-      const res = await fetch(CLOUD_STORE_URL, {
-        method: 'GET',
-        headers: {
-          'X-Master-Key': ACCESS_KEY
-        }
-      });
+      const headers = {};
+      if (ACCESS_KEY) headers['X-Master-Key'] = ACCESS_KEY;
+
+      const res = await fetch(CLOUD_STORE_URL, { method: 'GET', headers });
 
       if (res.ok) {
         const result = await res.json();
@@ -77,7 +81,7 @@ export class CloudSyncService {
 
   // 2. 自動在背景將最新內容上傳雲端
   async uploadCloudData() {
-    if (this.isSyncing) return;
+    if (!CLOUD_STORE_URL || this.isSyncing) return;
     this.isSyncing = true;
 
     const payload = {
