@@ -18,17 +18,18 @@
   <!-- Remix Icons (via CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
-  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v53) -->
-  <link rel="stylesheet" href="css/index.css?v=53">
-  <link rel="stylesheet" href="css/sidebar.css?v=53">
-  <link rel="stylesheet" href="css/header.css?v=53">
-  <link rel="stylesheet" href="css/workspace.css?v=53">
-  <link rel="stylesheet" href="css/smoothjazz.css?v=53">
-  <link rel="stylesheet" href="css/bulletin.css?v=53">
-  <link rel="stylesheet" href="css/fund.css?v=53">
-  <link rel="stylesheet" href="css/island.css?v=53">
-  <link rel="stylesheet" href="css/productivity.css?v=53">
-  <link rel="stylesheet" href="css/settings.css?v=53">
+  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v54) -->
+  <link rel="stylesheet" href="css/index.css?v=54">
+  <link rel="stylesheet" href="css/sidebar.css?v=54">
+  <link rel="stylesheet" href="css/header.css?v=54">
+  <link rel="stylesheet" href="css/workspace.css?v=54">
+  <link rel="stylesheet" href="css/smoothjazz.css?v=54">
+  <link rel="stylesheet" href="css/bulletin.css?v=54">
+  <link rel="stylesheet" href="css/fund.css?v=54">
+  <link rel="stylesheet" href="css/grades.css?v=54">
+  <link rel="stylesheet" href="css/island.css?v=54">
+  <link rel="stylesheet" href="css/productivity.css?v=54">
+  <link rel="stylesheet" href="css/settings.css?v=54">
 </head>
 <body class="theme-dark">
 
@@ -55,6 +56,10 @@
         <button class="nav-item" data-view="fund" id="nav-fund">
           <i class="ri-wallet-3-line"></i>
           <span class="nav-label">214 班教材費專戶</span>
+        </button>
+        <button class="nav-item" data-view="grades" id="nav-grades">
+          <i class="ri-graduation-cap-line"></i>
+          <span class="nav-label">214 班學生成績查詢</span>
         </button>
         <button class="nav-item" data-view="island" id="nav-island">
           <i class="ri-community-line"></i>
@@ -125,7 +130,14 @@
           </div>
         </section>
 
-        <!-- Module Panel 3: 島民行政中心 -->
+        <!-- Module Panel 3: 214 班學生成績查詢 -->
+        <section id="panel-grades" class="module-panel panel-grades" data-module="grades">
+          <div class="panel-body" id="grades-container">
+            <!-- Grades Content JS Rendered -->
+          </div>
+        </section>
+
+        <!-- Module Panel 4: 島民行政中心 -->
         <section id="panel-island" class="module-panel panel-island" data-module="island">
           <div class="panel-body" id="island-container">
             <!-- Island Content JS Rendered -->
@@ -215,7 +227,7 @@
   <!-- 設定面板 Drawer -->
   <div id="settings-drawer" class="drawer drawer-right">
     <div class="drawer-header">
-      <h3><i class="ri-settings-4-line"></i> 偏好設定與外觀</h3>
+      <h3><i class="ri-settings-4-line"></i> 偏好設定與系統</h3>
       <button class="close-drawer-btn" id="close-settings-btn"><i class="ri-close-line"></i></button>
     </div>
     <div class="drawer-body">
@@ -246,6 +258,6 @@
   <div id="modal-overlay" class="modal-overlay"></div>
 
   <!-- JavaScript Modules -->
-  <script type="module" src="js/app.js?v=53"></script>
+  <script type="module" src="js/app.js?v=54"></script>
 </body>
 </html>

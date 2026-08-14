@@ -9,6 +9,7 @@ export function initHeader() {
       const titleMap = {
         bulletin: '214 班電子佈告欄',
         fund: '214 班教材費專戶',
+        grades: '214 班學生成績查詢',
         island: '島民行政中心'
       };
       if (pageTitle) pageTitle.textContent = titleMap[state.activeTab] || '行動整合頁面';
