@@ -4,22 +4,28 @@ const DEFAULT_ADMIN_SECRET = 'a8b414c024b8';
 
 const BULLETIN_PORTALS = {
   bulletin: 'https://maxchan-stack.github.io/bulletin-board-web/bulletin.html',
-  student: 'https://maxchan-stack.github.io/bulletin-board-web/index.html',
-  parent: 'https://maxchan-stack.github.io/bulletin-board-web/parent.html',
-  admin: 'https://maxchan-stack.github.io/bulletin-board-web/admin.html'
+  student:  'https://maxchan-stack.github.io/bulletin-board-web/index.html',
+  parent:   'https://maxchan-stack.github.io/bulletin-board-web/parent.html',
+  teacher:  'https://maxchan-stack.github.io/bulletin-board-web/bulletin.html',
+  admin:    'https://maxchan-stack.github.io/bulletin-board-web/admin.html'
 };
+
+function getPortalUrl(portalKey) {
+  let url = BULLETIN_PORTALS[portalKey] || BULLETIN_PORTALS.bulletin;
+  const secret = localStorage.getItem('bulletin_admin_secret') || DEFAULT_ADMIN_SECRET;
+
+  if (portalKey === 'teacher' || portalKey === 'admin') {
+    url += `?admin=${encodeURIComponent(secret)}`;
+  }
+  return url;
+}
 
 export function initBulletin() {
   const container = document.getElementById('bulletin-container');
   if (!container) return;
 
   const currentTab = store.get('bulletinPortal') || 'bulletin';
-  let currentUrl = BULLETIN_PORTALS[currentTab] || BULLETIN_PORTALS.bulletin;
-
-  if (currentTab === 'admin') {
-    const secret = localStorage.getItem('bulletin_admin_secret') || DEFAULT_ADMIN_SECRET;
-    currentUrl += `?admin=${encodeURIComponent(secret)}`;
-  }
+  const currentUrl = getPortalUrl(currentTab);
 
   container.innerHTML = `
     <div class="bulletin-wrapper">
@@ -34,8 +40,11 @@ export function initBulletin() {
         <button class="bulletin-tab-btn ${currentTab === 'parent' ? 'active' : ''}" data-portal="parent">
           <i class="ri-parent-line"></i> 家長版
         </button>
-        <button class="bulletin-tab-btn ${currentTab === 'admin' ? 'active' : ''}" data-portal="admin">
+        <button class="bulletin-tab-btn ${currentTab === 'teacher' ? 'active' : ''}" data-portal="teacher">
           <i class="ri-edit-box-line"></i> 導師發布台
+        </button>
+        <button class="bulletin-tab-btn ${currentTab === 'admin' ? 'active' : ''}" data-portal="admin">
+          <i class="ri-key-2-line"></i> 授權碼管理
         </button>
         <button id="bulletin-reload-btn" class="btn btn-secondary btn-sm" title="重新載入">
           <i class="ri-refresh-line"></i> 重新載入
@@ -59,13 +68,7 @@ export function initBulletin() {
   const reloadBtn = document.getElementById('bulletin-reload-btn');
 
   function switchPortal(portalKey) {
-    let targetUrl = BULLETIN_PORTALS[portalKey] || BULLETIN_PORTALS.bulletin;
-
-    // 自動帶入導師授權碼，無須手動輸入與記憶
-    if (portalKey === 'admin') {
-      const secret = localStorage.getItem('bulletin_admin_secret') || DEFAULT_ADMIN_SECRET;
-      targetUrl += `?admin=${encodeURIComponent(secret)}`;
-    }
+    const targetUrl = getPortalUrl(portalKey);
 
     iframe.src = targetUrl;
     store.set('bulletinPortal', portalKey);
@@ -88,3 +91,4 @@ export function initBulletin() {
     setTimeout(() => { iframe.src = currentSrc; }, 200);
   });
 }
+
