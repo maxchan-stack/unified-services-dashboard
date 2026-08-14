@@ -18,18 +18,17 @@
   <!-- Remix Icons (via CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
-  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v52) -->
-  <link rel="stylesheet" href="css/index.css?v=52">
-  <link rel="stylesheet" href="css/sidebar.css?v=52">
-  <link rel="stylesheet" href="css/header.css?v=52">
-  <link rel="stylesheet" href="css/workspace.css?v=52">
-  <link rel="stylesheet" href="css/smoothjazz.css?v=52">
-  <link rel="stylesheet" href="css/gemini.css?v=52">
-  <link rel="stylesheet" href="css/google.css?v=52">
-  <link rel="stylesheet" href="css/bulletin.css?v=52">
-  <link rel="stylesheet" href="css/island.css?v=52">
-  <link rel="stylesheet" href="css/productivity.css?v=52">
-  <link rel="stylesheet" href="css/settings.css?v=52">
+  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v53) -->
+  <link rel="stylesheet" href="css/index.css?v=53">
+  <link rel="stylesheet" href="css/sidebar.css?v=53">
+  <link rel="stylesheet" href="css/header.css?v=53">
+  <link rel="stylesheet" href="css/workspace.css?v=53">
+  <link rel="stylesheet" href="css/smoothjazz.css?v=53">
+  <link rel="stylesheet" href="css/bulletin.css?v=53">
+  <link rel="stylesheet" href="css/fund.css?v=53">
+  <link rel="stylesheet" href="css/island.css?v=53">
+  <link rel="stylesheet" href="css/productivity.css?v=53">
+  <link rel="stylesheet" href="css/settings.css?v=53">
 </head>
 <body class="theme-dark">
 
@@ -53,13 +52,9 @@
           <i class="ri-newspaper-line"></i>
           <span class="nav-label">214 班電子佈告欄</span>
         </button>
-        <button class="nav-item" data-view="gemini" id="nav-gemini">
-          <i class="ri-brain-line"></i>
-          <span class="nav-label">Gemini AI 助手</span>
-        </button>
-        <button class="nav-item" data-view="google" id="nav-google">
-          <i class="ri-map-pin-2-line"></i>
-          <span class="nav-label">Google 地圖與搜尋</span>
+        <button class="nav-item" data-view="fund" id="nav-fund">
+          <i class="ri-wallet-3-line"></i>
+          <span class="nav-label">214 班教材費專戶</span>
         </button>
         <button class="nav-item" data-view="island" id="nav-island">
           <i class="ri-community-line"></i>
@@ -80,7 +75,7 @@
       <div class="sidebar-footer">
         <button class="nav-item" id="btn-open-settings">
           <i class="ri-settings-4-line"></i>
-          <span class="nav-label">偏好設定與 API</span>
+          <span class="nav-label">偏好設定與系統</span>
         </button>
         <div id="pwa-install-container" style="display: none;">
           <button id="pwa-install-btn" class="pwa-btn">
@@ -94,7 +89,7 @@
     <!-- 主工作區與頂部導覽 Header & Main Content -->
     <div class="main-wrapper">
       
-      <!-- 頂部功能列 Header (極簡 Slim 狀態 + 行動裝置 RWD 選單) -->
+      <!-- 頂部功能列 Header -->
       <header id="header" class="header">
         <div class="header-left">
           <button id="mobile-menu-toggle" class="icon-btn-ghost mobile-menu-btn" title="開啟選單">
@@ -106,38 +101,31 @@
           <select id="sheets-shortcut-select" class="sheets-shortcut-select" title="快速開啟 214 班功能對應的 Google 試算表">
             <option value="" disabled selected>📊 雲端試算表捷徑...</option>
             <option value="https://docs.google.com/spreadsheets/d/1p2Ii2M8dOGdBffuLe0hvE40P6qmfj4SS55uQ4_9bQrQ/edit">📌 214 電子佈告欄試算表</option>
-            <option value="https://docs.google.com/spreadsheets/d/18CZv9TNJHrUBiAGPUTti2pNuDEMMXwniXU9aBs_lsyQ/edit?gid=0#gid=0">💰 214 班費紀錄試算表</option>
+            <option value="https://docs.google.com/spreadsheets/d/18CZv9TNJHrUBiAGPUTti2pNuDEMMXwniXU9aBs_lsyQ/edit?gid=0#gid=0">💰 214 教材費專戶試算表</option>
             <option value="https://docs.google.com/spreadsheets/d/1PEzy-SibsTw-DXUacBEn4u8jvafyxhFO3EjDgMNJ-Gw/edit?gid=0#gid=0">🎓 214 成績查詢試算表</option>
           </select>
           <div id="cloud-sync-status" class="cloud-sync-status ready" title="100% 免登入之雲端自動即時同步">☁️ 雲端同步中</div>
         </div>
       </header>
 
-      <!-- 主要工作區 Working Canvas (Focus-First 100% 滿版專注) -->
+      <!-- 主要工作區 Working Canvas -->
       <main id="workspace" class="workspace layout-tab">
         
-        <!-- Module Panel 1: High School Bulletin Board -->
+        <!-- Module Panel 1: 214 班電子佈告欄 -->
         <section id="panel-bulletin" class="module-panel panel-bulletin active-tab" data-module="bulletin">
           <div class="panel-body" id="bulletin-container">
             <!-- Bulletin Content JS Rendered -->
           </div>
         </section>
 
-        <!-- Module Panel 2: Gemini AI -->
-        <section id="panel-gemini" class="module-panel panel-gemini" data-module="gemini">
-          <div class="panel-body" id="gemini-container">
-            <!-- Gemini Content JS Rendered -->
+        <!-- Module Panel 2: 214 班教材費專戶 -->
+        <section id="panel-fund" class="module-panel panel-fund" data-module="fund">
+          <div class="panel-body" id="fund-container">
+            <!-- Fund Content JS Rendered -->
           </div>
         </section>
 
-        <!-- Module Panel 3: Google Maps & Search -->
-        <section id="panel-google" class="module-panel panel-google" data-module="google">
-          <div class="panel-body" id="google-container">
-            <!-- Google Content JS Rendered -->
-          </div>
-        </section>
-
-        <!-- Module Panel 4: Island Resident Admin Center -->
+        <!-- Module Panel 3: 島民行政中心 -->
         <section id="panel-island" class="module-panel panel-island" data-module="island">
           <div class="panel-body" id="island-container">
             <!-- Island Content JS Rendered -->
@@ -227,26 +215,11 @@
   <!-- 設定面板 Drawer -->
   <div id="settings-drawer" class="drawer drawer-right">
     <div class="drawer-header">
-      <h3><i class="ri-settings-4-line"></i> 偏好設定與 API 管理</h3>
+      <h3><i class="ri-settings-4-line"></i> 偏好設定與外觀</h3>
       <button class="close-drawer-btn" id="close-settings-btn"><i class="ri-close-line"></i></button>
     </div>
     <div class="drawer-body">
       
-      <div class="setting-group">
-        <h4><i class="ri-key-2-line"></i> API 金鑰配置</h4>
-        <p class="setting-desc">金鑰將安全存於您的瀏覽器 LocalStorage，絕不上傳至任何伺服器。</p>
-        
-        <div class="field-group">
-          <label for="input-gemini-key">Google Gemini API Key</label>
-          <div class="input-with-btn">
-            <input type="password" id="input-gemini-key" placeholder="貼上 AI Studio 發行的 API Key (AIzaSy...)">
-            <button id="btn-verify-gemini" class="btn btn-secondary btn-sm"><i class="ri-checkbox-circle-line"></i> 驗證 Key</button>
-          </div>
-          <span id="gemini-key-status" class="key-status-text"></span>
-          <small class="field-hint">未輸入時將自動切換為「模擬回應展示模式」。</small>
-        </div>
-      </div>
-
       <div class="setting-group">
         <h4><i class="ri-palette-line"></i> 外觀主題與色彩</h4>
         <div class="field-group">
@@ -273,6 +246,6 @@
   <div id="modal-overlay" class="modal-overlay"></div>
 
   <!-- JavaScript Modules -->
-  <script type="module" src="js/app.js?v=52"></script>
+  <script type="module" src="js/app.js?v=53"></script>
 </body>
 </html>

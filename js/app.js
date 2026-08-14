@@ -3,10 +3,9 @@ import { initSidebar } from './ui/sidebar.js';
 import { initHeader } from './ui/header.js';
 import { initWorkspace } from './ui/workspace.js';
 import { initRouter } from './router.js';
-import { initGemini } from './modules/gemini.js';
 import { initSmoothJazz } from './modules/smoothjazz.js';
-import { initGoogle } from './modules/google.js';
 import { initBulletin } from './modules/bulletin.js';
+import { initFund } from './modules/fund.js';
 import { initIsland } from './modules/island.js';
 import { initCrossIntegration } from './modules/cross-integration.js';
 import { initProductivity } from './modules/productivity.js';
@@ -14,7 +13,7 @@ import { initSettings } from './utils/settings.js';
 import { cloudSync } from './utils/cloudSync.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('[MobileHub] Initializing Morandi Slate Blue Focus-First Dashboard (v52)...');
+  console.log('[MobileHub] Initializing Morandi Slate Blue Focus-First Dashboard (v53)...');
 
   // 1. Apply Initial Theme
   const theme = store.get('theme') || 'theme-dark';
@@ -27,10 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initRouter();
 
   // 3. Initialize Service Modules
-  initGemini();
   initSmoothJazz();
-  initGoogle();
   initBulletin();
+  initFund();
   initIsland();
 
   // 4. Initialize Enhancement Modules & Cloud Sync
@@ -44,10 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. Register PWA Service Worker (with auto-update & cache purge)
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./service-worker.js?v=52')
+      navigator.serviceWorker.register('./service-worker.js?v=53')
         .then(reg => {
           console.log('[MobileHub] ServiceWorker registered with scope:', reg.scope);
-          reg.update(); // Force check for newer Service Worker immediately
+          reg.update();
         })
         .catch(err => console.warn('[MobileHub] ServiceWorker registration failed:', err));
     });
