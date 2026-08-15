@@ -82,6 +82,86 @@ body.theme-terracotta {
   --c-primary-dim:  rgba(212,154,143,0.15);
 }
 
+/* 主題切換：極簡黑曜與琥珀暖金 (Obsidian & Warm Amber) */
+body.theme-obsidian-amber {
+  --c-bg:           #0d0f12;
+  --c-surface:      #15191e;
+  --c-surface-2:    #1c222a;
+  --c-surface-3:    #252c37;
+  --c-border:       #27303d;
+  --c-border-hover: #e5a93c;
+  --c-text:         #f0f3f6;
+  --c-text-muted:   #9ca7b5;
+  --c-text-dim:     #6f7a88;
+  --c-primary:      #e5a93c;
+  --c-primary-dark: #c68c28;
+  --c-primary-dim:  rgba(229, 169, 60, 0.15);
+  --bg-image: 
+    repeating-linear-gradient(0deg, rgba(229, 169, 60, 0.015) 0px, rgba(229, 169, 60, 0.015) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(229, 169, 60, 0.015) 0px, rgba(229, 169, 60, 0.015) 1px, transparent 1px, transparent 4px),
+    radial-gradient(circle at 50% 50%, rgba(21, 25, 30, 0.95) 0%, rgba(13, 15, 18, 0.98) 100%);
+}
+
+/* 主題切換：北歐松針墨綠與鼠尾草 (Nordic Pine & Sage) */
+body.theme-nordic-pine {
+  --c-bg:           #0e1614;
+  --c-surface:      #15211e;
+  --c-surface-2:    #1c2c28;
+  --c-surface-3:    #253a35;
+  --c-border:       #283e38;
+  --c-border-hover: #52b788;
+  --c-text:         #e8f1ee;
+  --c-text-muted:   #9db5ae;
+  --c-text-dim:     #708882;
+  --c-primary:      #52b788;
+  --c-primary-dark: #3d996e;
+  --c-primary-dim:  rgba(82, 183, 136, 0.15);
+  --bg-image: 
+    repeating-linear-gradient(0deg, rgba(82, 183, 136, 0.015) 0px, rgba(82, 183, 136, 0.015) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(82, 183, 136, 0.015) 0px, rgba(82, 183, 136, 0.015) 1px, transparent 1px, transparent 4px),
+    radial-gradient(circle at 50% 50%, rgba(21, 33, 30, 0.95) 0%, rgba(14, 22, 20, 0.98) 100%);
+}
+
+/* 主題切換：星系曜紫與薄荷電光青 (Nebula Violet & Mint Teal) */
+body.theme-nebula-teal {
+  --c-bg:           #0e111a;
+  --c-surface:      #151b28;
+  --c-surface-2:    #1e273a;
+  --c-surface-3:    #28354e;
+  --c-border:       #293650;
+  --c-border-hover: #2dd4bf;
+  --c-text:         #f1f5f9;
+  --c-text-muted:   #9fb0cb;
+  --c-text-dim:     #6f7f9b;
+  --c-primary:      #2dd4bf;
+  --c-primary-dark: #14b8a6;
+  --c-primary-dim:  rgba(45, 212, 191, 0.15);
+  --bg-image: 
+    repeating-linear-gradient(0deg, rgba(45, 212, 191, 0.015) 0px, rgba(45, 212, 191, 0.015) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(45, 212, 191, 0.015) 0px, rgba(45, 212, 191, 0.015) 1px, transparent 1px, transparent 4px),
+    radial-gradient(circle at 50% 50%, rgba(21, 27, 40, 0.95) 0%, rgba(14, 17, 26, 0.98) 100%);
+}
+
+/* 主題切換：日系焙茶燕麥暖米白 (Japanese Linen & Oolong) */
+body.theme-japanese-linen {
+  --c-bg:           #f7f5f0;
+  --c-surface:      #ffffff;
+  --c-surface-2:    #efece5;
+  --c-surface-3:    #e4dfd6;
+  --c-border:       #ddd8cd;
+  --c-border-hover: #8b5e3c;
+  --c-text:         #2c2724;
+  --c-text-muted:   #6e665e;
+  --c-text-dim:     #968c83;
+  --c-primary:      #8b5e3c;
+  --c-primary-dark: #70492c;
+  --c-primary-dim:  rgba(139, 94, 60, 0.12);
+  --bg-image: 
+    repeating-linear-gradient(0deg, rgba(139, 94, 60, 0.03) 0px, rgba(139, 94, 60, 0.03) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(139, 94, 60, 0.03) 0px, rgba(139, 94, 60, 0.03) 1px, transparent 1px, transparent 4px),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.9) 0%, rgba(247, 245, 240, 0.5) 100%);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
