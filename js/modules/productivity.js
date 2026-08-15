@@ -45,6 +45,7 @@ export function initProductivity() {
 
   // Pomodoro Timer
   const pomodoroModal = document.getElementById('pomodoro-modal');
+  const pomodoroCapsule = document.getElementById('pomodoro-capsule');
   const openPomoBtn = document.getElementById('btn-open-pomodoro');
   const closePomoBtn = document.getElementById('close-pomodoro-modal');
   
@@ -70,6 +71,10 @@ export function initProductivity() {
     if (headerDisplay) headerDisplay.textContent = formatted;
     if (modalDisplay) modalDisplay.textContent = formatted;
 
+    if (pomodoroCapsule) {
+      pomodoroCapsule.classList.toggle('phase-break', !isWorkPhase);
+    }
+
     // Update Progress Ring
     if (ringProgress) {
       const progress = remainingSeconds / (isWorkPhase ? 25 * 60 : 5 * 60);
@@ -84,10 +89,14 @@ export function initProductivity() {
     if (isRunning) return;
     isRunning = true;
 
+    // 啟動膠囊並自動隱藏全屏 Modal 回到主視圖
+    if (pomodoroCapsule) pomodoroCapsule.style.display = 'flex';
+    pomodoroModal?.classList.remove('active');
+    overlay?.classList.remove('active');
+
     ringContainer?.classList.add('is-running');
     pomoStartBtn.style.display = 'none';
     pomoPauseBtn.style.display = 'inline-flex';
-    if (headerToggle) headerToggle.innerHTML = '<i class="ri-pause-fill"></i>';
 
     // 專注階段自動連線隨機電台並播放
     if (isWorkPhase) {
@@ -117,7 +126,6 @@ export function initProductivity() {
 
         pomoStartBtn.style.display = 'inline-flex';
         pomoPauseBtn.style.display = 'none';
-        if (headerToggle) headerToggle.innerHTML = '<i class="ri-play-fill"></i>';
         updateTimerDisplays();
       }
     }, 1000);
@@ -130,13 +138,13 @@ export function initProductivity() {
     ringContainer?.classList.remove('is-running');
     pomoStartBtn.style.display = 'inline-flex';
     pomoPauseBtn.style.display = 'none';
-    if (headerToggle) headerToggle.innerHTML = '<i class="ri-play-fill"></i>';
   }
 
   function resetTimer() {
     pauseTimer();
     isWorkPhase = true;
     remainingSeconds = 25 * 60;
+    if (pomodoroCapsule) pomodoroCapsule.style.display = 'none';
     if (modalPhase) modalPhase.textContent = '工作時間';
     updateTimerDisplays();
   }
@@ -151,9 +159,16 @@ export function initProductivity() {
     overlay.classList.remove('active');
   });
 
-  headerToggle?.addEventListener('click', () => {
-    if (isRunning) pauseTimer();
-    else startTimer();
+  // 點擊膠囊展開完整番茄鐘彈窗
+  headerToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    pomodoroModal.classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  pomodoroCapsule?.addEventListener('click', () => {
+    pomodoroModal.classList.add('active');
+    overlay.classList.add('active');
   });
 
   pomoStartBtn?.addEventListener('click', startTimer);

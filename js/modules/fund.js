@@ -29,6 +29,14 @@ export function initFund() {
 
       <!-- 教材費無縫內嵌主視窗 -->
       <div class="fund-embed-container">
+        <div class="skeleton-loader" id="fund-skeleton">
+          <div class="skeleton-bar h-lg"></div>
+          <div class="skeleton-bar h-md"></div>
+          <div class="skeleton-bar h-sm"></div>
+          <div class="skeleton-bar h-card"></div>
+          <div class="skeleton-bar h-md"></div>
+          <div class="skeleton-bar h-sm"></div>
+        </div>
         <iframe id="fund-iframe"
                 class="fund-iframe"
                 src="${currentUrl}"
@@ -40,11 +48,17 @@ export function initFund() {
   `;
 
   const iframe = document.getElementById('fund-iframe');
+  const skeleton = document.getElementById('fund-skeleton');
   const tabBtns = container.querySelectorAll('.fund-tab-btn');
   const reloadBtn = document.getElementById('fund-reload-btn');
 
+  iframe?.addEventListener('load', () => {
+    skeleton?.classList.add('hidden');
+  });
+
   function switchPortal(portalKey) {
     const targetUrl = FUND_PORTALS[portalKey] || FUND_PORTALS.parent;
+    skeleton?.classList.remove('hidden');
     iframe.src = targetUrl;
     store.set('fundPortal', portalKey);
 
@@ -62,6 +76,7 @@ export function initFund() {
 
   reloadBtn?.addEventListener('click', () => {
     const currentSrc = iframe.src;
+    skeleton?.classList.remove('hidden');
     iframe.src = '';
     setTimeout(() => { iframe.src = currentSrc; }, 200);
   });

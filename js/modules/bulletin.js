@@ -53,6 +53,14 @@ export function initBulletin() {
 
       <!-- 214 班電子佈告欄無縫內嵌主視窗 -->
       <div class="bulletin-embed-container">
+        <div class="skeleton-loader" id="bulletin-skeleton">
+          <div class="skeleton-bar h-lg"></div>
+          <div class="skeleton-bar h-md"></div>
+          <div class="skeleton-bar h-sm"></div>
+          <div class="skeleton-bar h-card"></div>
+          <div class="skeleton-bar h-md"></div>
+          <div class="skeleton-bar h-sm"></div>
+        </div>
         <iframe id="bulletin-iframe"
                 class="bulletin-iframe"
                 src="${currentUrl}"
@@ -64,12 +72,18 @@ export function initBulletin() {
   `;
 
   const iframe = document.getElementById('bulletin-iframe');
+  const skeleton = document.getElementById('bulletin-skeleton');
   const tabBtns = container.querySelectorAll('.bulletin-tab-btn');
   const reloadBtn = document.getElementById('bulletin-reload-btn');
+
+  iframe?.addEventListener('load', () => {
+    skeleton?.classList.add('hidden');
+  });
 
   function switchPortal(portalKey) {
     const targetUrl = getPortalUrl(portalKey);
 
+    skeleton?.classList.remove('hidden');
     iframe.src = targetUrl;
     store.set('bulletinPortal', portalKey);
 
@@ -87,6 +101,7 @@ export function initBulletin() {
 
   reloadBtn?.addEventListener('click', () => {
     const currentSrc = iframe.src;
+    skeleton?.classList.remove('hidden');
     iframe.src = '';
     setTimeout(() => { iframe.src = currentSrc; }, 200);
   });

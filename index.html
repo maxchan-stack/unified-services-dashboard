@@ -18,20 +18,30 @@
   <!-- Remix Icons (via CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
-  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v56) -->
-  <link rel="stylesheet" href="css/index.css?v=56">
-  <link rel="stylesheet" href="css/sidebar.css?v=56">
-  <link rel="stylesheet" href="css/header.css?v=56">
-  <link rel="stylesheet" href="css/workspace.css?v=56">
-  <link rel="stylesheet" href="css/smoothjazz.css?v=56">
-  <link rel="stylesheet" href="css/bulletin.css?v=56">
-  <link rel="stylesheet" href="css/fund.css?v=56">
-  <link rel="stylesheet" href="css/grades.css?v=56">
-  <link rel="stylesheet" href="css/island.css?v=56">
-  <link rel="stylesheet" href="css/productivity.css?v=56">
-  <link rel="stylesheet" href="css/settings.css?v=56">
+  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v57) -->
+  <link rel="stylesheet" href="css/index.css?v=57">
+  <link rel="stylesheet" href="css/sidebar.css?v=57">
+  <link rel="stylesheet" href="css/header.css?v=57">
+  <link rel="stylesheet" href="css/workspace.css?v=57">
+  <link rel="stylesheet" href="css/smoothjazz.css?v=57">
+  <link rel="stylesheet" href="css/bulletin.css?v=57">
+  <link rel="stylesheet" href="css/fund.css?v=57">
+  <link rel="stylesheet" href="css/grades.css?v=57">
+  <link rel="stylesheet" href="css/island.css?v=57">
+  <link rel="stylesheet" href="css/productivity.css?v=57">
+  <link rel="stylesheet" href="css/settings.css?v=57">
 </head>
 <body class="theme-dark">
+
+  <!-- PWA 安裝引導橫幅 (PWA Install Prompt Banner) -->
+  <div id="pwa-install-banner" class="pwa-install-banner" style="display:none;">
+    <i class="ri-smartphone-line"></i>
+    <span>安裝為手機 App，隨時快速開啟行動整合頁面</span>
+    <button id="pwa-banner-install-btn" class="btn btn-primary btn-sm">立即安裝</button>
+    <button id="pwa-banner-dismiss-btn" class="pwa-banner-dismiss">
+      <i class="ri-close-line"></i>
+    </button>
+  </div>
 
   <div id="app" class="app-layout">
     
@@ -109,6 +119,14 @@
             <option value="https://docs.google.com/spreadsheets/d/18CZv9TNJHrUBiAGPUTti2pNuDEMMXwniXU9aBs_lsyQ/edit?gid=0#gid=0">💰 214 教材費專戶試算表</option>
             <option value="https://docs.google.com/spreadsheets/d/1PEzy-SibsTw-DXUacBEn4u8jvafyxhFO3EjDgMNJ-Gw/edit?gid=0#gid=0">🎓 214 成績查詢試算表</option>
           </select>
+          <!-- 番茄鐘膠囊計時器（計時進行中才顯示） -->
+          <div id="pomodoro-capsule" class="pomodoro-capsule" style="display:none;">
+            <i class="ri-timer-flash-line"></i>
+            <span id="header-timer-display" class="capsule-timer-display">25:00</span>
+            <button id="header-timer-toggle" class="capsule-expand-btn" title="展開番茄鐘">
+              <i class="ri-arrow-up-s-line"></i>
+            </button>
+          </div>
           <div id="cloud-sync-status" class="cloud-sync-status ready" title="100% 免登入之雲端自動即時同步">☁️ 雲端同步中</div>
         </div>
       </header>
@@ -176,6 +194,30 @@
     </div>
 
   </div>
+
+  <!-- 行動裝置底部導航列 (Mobile Bottom Navigation Bar) -->
+  <nav id="bottom-nav" class="bottom-nav">
+    <button class="bottom-nav-item active" data-view="bulletin" id="bn-bulletin">
+      <i class="ri-newspaper-line"></i>
+      <span>佈告欄</span>
+    </button>
+    <button class="bottom-nav-item" data-view="fund" id="bn-fund">
+      <i class="ri-wallet-3-line"></i>
+      <span>教材費</span>
+    </button>
+    <button class="bottom-nav-item" data-view="grades" id="bn-grades">
+      <i class="ri-graduation-cap-line"></i>
+      <span>成績</span>
+    </button>
+    <button class="bottom-nav-item" data-view="island" id="bn-island">
+      <i class="ri-community-line"></i>
+      <span>行政</span>
+    </button>
+    <button class="bottom-nav-item" id="bn-more">
+      <i class="ri-more-2-fill"></i>
+      <span>更多</span>
+    </button>
+  </nav>
 
   <!-- Drawers / Modals -->
 
@@ -266,6 +308,6 @@
   <div id="modal-overlay" class="modal-overlay"></div>
 
   <!-- JavaScript Modules -->
-  <script type="module" src="js/app.js?v=55"></script>
+  <script type="module" src="js/app.js?v=57"></script>
 </body>
 </html>

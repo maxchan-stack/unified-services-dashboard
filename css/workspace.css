@@ -46,3 +46,53 @@
     border-radius: var(--radius-md);
   }
 }
+
+/* ── 模組載入骨架屏 (Skeleton Loading) ── */
+.skeleton-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: var(--c-bg);
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.skeleton-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.skeleton-bar {
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    90deg,
+    var(--c-surface-2) 25%,
+    var(--c-surface-3) 50%,
+    var(--c-surface-2) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-bar.h-lg   { height: 36px; width: 60%; }
+.skeleton-bar.h-md   { height: 20px; width: 90%; }
+.skeleton-bar.h-sm   { height: 14px; width: 75%; }
+.skeleton-bar.h-card { height: 110px; width: 100%; }
+
+/* iframe 外層容器支援相對定位以正確包含骨架屏 */
+.bulletin-embed-container,
+.fund-embed-container,
+.grades-embed-container,
+.island-embed-container {
+  position: relative;
+}

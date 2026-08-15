@@ -21,6 +21,14 @@ export function initGrades() {
 
       <!-- 成績系統無縫內嵌主視窗 -->
       <div class="grades-embed-container">
+        <div class="skeleton-loader" id="grades-skeleton">
+          <div class="skeleton-bar h-lg"></div>
+          <div class="skeleton-bar h-md"></div>
+          <div class="skeleton-bar h-sm"></div>
+          <div class="skeleton-bar h-card"></div>
+          <div class="skeleton-bar h-md"></div>
+          <div class="skeleton-bar h-sm"></div>
+        </div>
         <iframe id="grades-iframe"
                 class="grades-iframe"
                 src="${GRADES_URL}"
@@ -32,16 +40,23 @@ export function initGrades() {
   `;
 
   const iframe = document.getElementById('grades-iframe');
+  const skeleton = document.getElementById('grades-skeleton');
   const reloadBtn = document.getElementById('grades-reload-btn');
   const homeBtn = document.getElementById('grades-home-btn');
 
+  iframe?.addEventListener('load', () => {
+    skeleton?.classList.add('hidden');
+  });
+
   reloadBtn?.addEventListener('click', () => {
     const currentSrc = iframe.src;
+    skeleton?.classList.remove('hidden');
     iframe.src = '';
     setTimeout(() => { iframe.src = currentSrc; }, 200);
   });
 
   homeBtn?.addEventListener('click', () => {
+    skeleton?.classList.remove('hidden');
     iframe.src = GRADES_URL;
   });
 }
