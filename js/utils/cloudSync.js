@@ -17,11 +17,11 @@ export class CloudSyncService {
     this.statusElement = document.getElementById('cloud-sync-status');
     
     if (!CLOUD_STORE_URL) {
-      this.updateStatus('🏠 使用本機儲存 (LocalStorage)', 'ready');
+      this.updateStatus('🏠 本機儲存', 'ready');
       return;
     }
 
-    this.updateStatus('☁️ 雲端自動同步已就緒', 'ready');
+    this.updateStatus('☁️ 雲端同步', 'ready');
     this.downloadCloudData();
 
     // 監聽 Store 變化，停止輸入 1.2 秒後自動靜默上傳
@@ -29,7 +29,7 @@ export class CloudSyncService {
 
     store.subscribe((key) => {
       if (key === 'scratchpadContent' || key === 'radioStreamUrl') {
-        this.updateStatus('⏳ 正在備份至雲端...', 'syncing');
+        this.updateStatus('⏳ 同步中...', 'syncing');
         debouncedSave();
       }
     });

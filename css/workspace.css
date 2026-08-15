@@ -38,9 +38,9 @@
 /* 行動裝置 RWD (< 768px) */
 @media (max-width: 768px) {
   .workspace {
-    padding: 6px;
-    height: calc(100vh - 40px - 48px);
-    height: calc(100dvh - 40px - 48px);
+    padding: 6px 6px 0 6px;
+    height: calc(100vh - 44px - 60px);
+    height: calc(100dvh - 44px - 60px);
   }
   .workspace.layout-tab .module-panel {
     border-radius: var(--radius-md);

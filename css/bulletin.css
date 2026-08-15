@@ -60,3 +60,26 @@
   height: 100%;
   border: none;
 }
+
+/* 行動裝置 RWD (< 768px) */
+@media (max-width: 768px) {
+  .bulletin-wrapper {
+    padding: 6px 6px 0 6px;
+    gap: 6px;
+  }
+  .bulletin-nav-bar {
+    gap: 4px;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .bulletin-nav-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .bulletin-tab-btn {
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    border-radius: var(--radius-pill);
+    gap: 4px;
+  }
+}

@@ -60,3 +60,26 @@
   height: 100%;
   border: none;
 }
+
+/* 行動裝置 RWD (< 768px) */
+@media (max-width: 768px) {
+  .grades-wrapper {
+    padding: 6px 6px 0 6px;
+    gap: 6px;
+  }
+  .grades-nav-bar {
+    gap: 4px;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .grades-nav-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .grades-tab-btn {
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    border-radius: var(--radius-pill);
+    gap: 4px;
+  }
+}
