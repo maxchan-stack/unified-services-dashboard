@@ -39,8 +39,9 @@
 @media (max-width: 768px) {
   .workspace {
     padding: 6px 6px 0 6px;
-    height: calc(100vh - 44px - 60px);
-    height: calc(100dvh - 44px - 60px);
+    /* 減去：頂部 Header(44px) + 電台橫列(40px) + 底部導航(60px) */
+    height: calc(100vh - 44px - 40px - 60px);
+    height: calc(100dvh - 44px - 40px - 60px);
   }
   .workspace.layout-tab .module-panel {
     border-radius: var(--radius-md);

@@ -2,7 +2,7 @@
  * State & LocalStorage Store Manager
  */
 const STORAGE_KEY = 'omnihub_config_v1';
-const VALID_TABS = ['bulletin', 'gemini', 'google', 'island'];
+const VALID_TABS = ['bulletin', 'fund', 'grades', 'island'];
 
 const defaultState = {
   theme: 'theme-dark',
