@@ -1,4 +1,4 @@
-const CACHE_NAME = 'omnihub-shell-v58';
+const CACHE_NAME = 'omnihub-shell-v59';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -9,9 +9,9 @@ const STATIC_ASSETS = [
   './css/header.css',
   './css/workspace.css',
   './css/smoothjazz.css',
-  './css/gemini.css',
-  './css/google.css',
   './css/bulletin.css',
+  './css/fund.css',
+  './css/grades.css',
   './css/island.css',
   './css/productivity.css',
   './css/settings.css',
@@ -22,9 +22,9 @@ const STATIC_ASSETS = [
   './js/ui/header.js',
   './js/ui/workspace.js',
   './js/modules/smoothjazz.js',
-  './js/modules/gemini.js',
-  './js/modules/google.js',
   './js/modules/bulletin.js',
+  './js/modules/fund.js',
+  './js/modules/grades.js',
   './js/modules/island.js',
   './js/modules/cross-integration.js',
   './js/modules/productivity.js',

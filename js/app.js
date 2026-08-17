@@ -14,7 +14,7 @@ import { initSettings } from './utils/settings.js';
 import { cloudSync } from './utils/cloudSync.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('[MobileHub] Initializing Morandi Slate Blue Focus-First Dashboard (v54)...');
+  console.log('[MobileHub] Initializing Morandi Slate Blue Focus-First Dashboard (v59)...');
 
   // 1. Apply Initial Theme
   const theme = store.get('theme') || 'theme-dark';
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. Register PWA Service Worker (with auto-update & cache purge)
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./service-worker.js?v=54')
+      navigator.serviceWorker.register('./service-worker.js?v=59')
         .then(reg => {
           console.log('[MobileHub] ServiceWorker registered with scope:', reg.scope);
           reg.update();

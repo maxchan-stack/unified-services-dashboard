@@ -71,6 +71,12 @@
   animation: pulse 1.2s infinite alternate;
 }
 
+.cloud-sync-status.warning {
+  color: #e5a93c;
+  border-color: rgba(229, 169, 60, 0.4);
+  background: rgba(229, 169, 60, 0.12);
+}
+
 @keyframes pulse {
   0% { opacity: 0.5; }
   100% { opacity: 1; }

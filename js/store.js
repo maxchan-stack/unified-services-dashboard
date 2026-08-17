@@ -12,7 +12,11 @@ const defaultState = {
     gemini: ''
   },
   scratchpadContent: '',
-  googleMapQuery: 'Taipei 101'
+  googleMapQuery: 'Taipei 101',
+  _cloudVersion: 0,
+  _deviceId: '',
+  _cloudStoreUrl: '',
+  _cloudAccessKey: ''
 };
 
 class Store {
