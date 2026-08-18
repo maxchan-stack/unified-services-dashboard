@@ -18,18 +18,18 @@
   <!-- Remix Icons (via CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
-  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v63) -->
-  <link rel="stylesheet" href="css/index.css?v=63">
-  <link rel="stylesheet" href="css/sidebar.css?v=63">
-  <link rel="stylesheet" href="css/header.css?v=63">
-  <link rel="stylesheet" href="css/workspace.css?v=63">
-  <link rel="stylesheet" href="css/smoothjazz.css?v=63">
-  <link rel="stylesheet" href="css/bulletin.css?v=63">
-  <link rel="stylesheet" href="css/fund.css?v=63">
-  <link rel="stylesheet" href="css/grades.css?v=63">
-  <link rel="stylesheet" href="css/island.css?v=63">
-  <link rel="stylesheet" href="css/productivity.css?v=63">
-  <link rel="stylesheet" href="css/settings.css?v=63">
+  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v64) -->
+  <link rel="stylesheet" href="css/index.css?v=64">
+  <link rel="stylesheet" href="css/sidebar.css?v=64">
+  <link rel="stylesheet" href="css/header.css?v=64">
+  <link rel="stylesheet" href="css/workspace.css?v=64">
+  <link rel="stylesheet" href="css/smoothjazz.css?v=64">
+  <link rel="stylesheet" href="css/bulletin.css?v=64">
+  <link rel="stylesheet" href="css/fund.css?v=64">
+  <link rel="stylesheet" href="css/grades.css?v=64">
+  <link rel="stylesheet" href="css/island.css?v=64">
+  <link rel="stylesheet" href="css/productivity.css?v=64">
+  <link rel="stylesheet" href="css/settings.css?v=64">
 </head>
 <body class="theme-dark">
 
@@ -298,19 +298,34 @@
         </div>
       </div>
 
-      <!-- AI 金鑰（Gemini API Key 不再顯示於此，改用隱性儲存提示） -->
+      <!-- 佈告欄管理員授權碼 -->
       <div class="setting-group">
         <h4><i class="ri-key-2-line"></i> 佈告欄管理員授權碼</h4>
-        <p class="setting-desc">設定後，「導師發布台」與「授權碼管理」功能才可使用。此碼儲存於本機，不會上傳至雲端。</p>
+        <p class="setting-desc">用於「導師發布台」與「授權碼管理」之身分驗證。可直接儲存本機密碼，亦可一鍵同步修改雲端密鑰。</p>
         <div class="field-group">
-          <label for="input-bulletin-secret">管理員授權碼（Admin Secret）</label>
+          <label for="input-bulletin-secret">目前管理員密鑰（Admin Secret）</label>
           <div class="input-with-btn">
-            <input type="password" id="input-bulletin-secret" placeholder="請輸入佈告欄管理員授權碼" autocomplete="off">
+            <input type="password" id="input-bulletin-secret" placeholder="請輸入目前管理員密鑰" autocomplete="off">
             <button id="btn-toggle-bulletin-secret" class="btn btn-ghost btn-sm" title="顯示/隱藏"><i class="ri-eye-line"></i></button>
           </div>
-          <p class="field-hint">儲存後立即生效，可隨時修改。</p>
-          <button id="btn-save-bulletin-secret" class="btn btn-primary btn-sm"><i class="ri-save-line"></i> 儲存授權碼</button>
+          <div class="btn-group-row" style="margin-top: 4px;">
+            <button id="btn-save-bulletin-secret" class="btn btn-secondary btn-sm"><i class="ri-save-line"></i> 僅儲存至本機</button>
+            <button id="btn-show-change-secret" class="btn btn-ghost btn-sm"><i class="ri-lock-password-line"></i> 變更雲端密鑰...</button>
+          </div>
           <span id="bulletin-secret-status" class="key-status-text"></span>
+        </div>
+
+        <!-- 雲端密鑰變更折疊面板 -->
+        <div id="change-secret-panel" class="field-group" style="display: none; background: var(--c-surface-2); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--c-border); margin-top: 6px;">
+          <label for="input-new-bulletin-secret" style="font-weight: 600;">設定新管理員密鑰 (至少 6 字元)</label>
+          <div class="input-with-btn">
+            <input type="password" id="input-new-bulletin-secret" placeholder="請輸入新密鑰" autocomplete="off">
+            <button id="btn-toggle-new-secret" class="btn btn-ghost btn-sm" title="顯示/隱藏"><i class="ri-eye-line"></i></button>
+          </div>
+          <button id="btn-sync-cloud-secret" class="btn btn-primary btn-sm" style="margin-top: 6px;">
+            <i class="ri-cloud-line"></i> 驗證舊密碼並同步更新至雲端
+          </button>
+          <span id="sync-secret-status" class="key-status-text"></span>
         </div>
       </div>
 
@@ -347,6 +362,6 @@
   <div id="modal-overlay" class="modal-overlay"></div>
 
   <!-- JavaScript Modules -->
-  <script type="module" src="js/app.js?v=63"></script>
+  <script type="module" src="js/app.js?v=64"></script>
 </body>
 </html>
