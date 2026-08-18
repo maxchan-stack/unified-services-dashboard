@@ -261,4 +261,9 @@
   .mobile-menu-btn {
     display: none !important;
   }
+
+  /* 讓 sidebar-footer 的偏好設定按鈕不被底部導航列遮住 */
+  .sidebar-footer {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 12px);
+  }
 }

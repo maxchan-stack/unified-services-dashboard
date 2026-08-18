@@ -331,6 +331,15 @@ input:focus, select:focus, textarea:focus {
   visibility: visible;
 }
 
+/* 手機版 overlay：底部讓出底部導航列空間，避免遮擋 bottom-nav 點擊 */
+@media (max-width: 768px) {
+  .modal-overlay {
+    height: calc(100dvh - 60px - env(safe-area-inset-bottom, 0px));
+    /* overlay z-index 低於 drawer(1002) 但高於一般內容 */
+    z-index: 1001;
+  }
+}
+
 /* Scrollbar Customization */
 ::-webkit-scrollbar {
   width: 6px;

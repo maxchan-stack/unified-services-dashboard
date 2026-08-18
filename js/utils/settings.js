@@ -11,12 +11,6 @@ export function initSettings() {
   // ── 主題 ──
   const themeSelect = document.getElementById('select-theme');
 
-  // ── Gemini API Key ──
-  const geminiInput = document.getElementById('input-gemini-key');
-  const geminiToggleBtn = document.getElementById('btn-toggle-gemini-key');
-  const verifyGeminiBtn = document.getElementById('btn-verify-gemini');
-  const geminiStatusText = document.getElementById('gemini-key-status');
-
   // ── 佈告欄 Admin Secret ──
   const bulletinSecretInput = document.getElementById('input-bulletin-secret');
   const bulletinSecretToggleBtn = document.getElementById('btn-toggle-bulletin-secret');
@@ -35,8 +29,6 @@ export function initSettings() {
   const resetBtn = document.getElementById('btn-reset-all');
 
   // ── 載入既有值 ──
-  const keys = store.get('apiKeys');
-  if (keys && geminiInput) geminiInput.value = keys.gemini || '';
   if (themeSelect) themeSelect.value = store.get('theme') || 'theme-dark';
 
   // 佈告欄 secret（從 localStorage 直接讀，不存入 store）
@@ -79,7 +71,6 @@ export function initSettings() {
       }
     });
   }
-  setupTogglePassword(geminiInput, geminiToggleBtn);
   setupTogglePassword(bulletinSecretInput, bulletinSecretToggleBtn);
   setupTogglePassword(fundApiKeyInput, fundApiKeyToggleBtn);
 
@@ -117,56 +108,6 @@ export function initSettings() {
       fundApiKeyStatus.textContent = 'API Key 已儲存，教材費專戶功能已啟用。';
     }
     showToast('教材費 GAS API Key 已儲存', 'success');
-  });
-
-  // ── Gemini API Key 自動儲存 ──
-  geminiInput?.addEventListener('input', (e) => {
-    store.updateApiKeys({ gemini: e.target.value.trim() });
-  });
-
-  // ── Gemini API Key 驗證 ──
-  verifyGeminiBtn?.addEventListener('click', async () => {
-    const key = geminiInput?.value?.trim();
-    if (!key) {
-      if (geminiStatusText) {
-        geminiStatusText.className = 'key-status-text error';
-        geminiStatusText.textContent = '請先輸入 Gemini API Key！';
-      }
-      return;
-    }
-    if (geminiStatusText) {
-      geminiStatusText.className = 'key-status-text';
-      geminiStatusText.textContent = '正在連線驗證中...';
-    }
-    try {
-      const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: 'Ping test' }] }] })
-        }
-      );
-      const data = await res.json();
-      if (res.ok && data.candidates) {
-        if (geminiStatusText) {
-          geminiStatusText.className = 'key-status-text success';
-          geminiStatusText.textContent = '驗證成功！API Key 有效且可用。';
-        }
-        store.updateApiKeys({ gemini: key });
-        showToast('Gemini API Key 驗證成功', 'success');
-      } else {
-        if (geminiStatusText) {
-          geminiStatusText.className = 'key-status-text error';
-          geminiStatusText.textContent = `驗證失敗：${data.error?.message || 'Key 無效'}`;
-        }
-      }
-    } catch (e) {
-      if (geminiStatusText) {
-        geminiStatusText.className = 'key-status-text error';
-        geminiStatusText.textContent = `連線失敗：${e.message}`;
-      }
-    }
   });
 
   // ── 匯出/匯入/重置 ──
