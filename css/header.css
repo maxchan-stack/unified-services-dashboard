@@ -77,9 +77,24 @@
   background: rgba(229, 169, 60, 0.12);
 }
 
-@keyframes pulse {
-  0% { opacity: 0.5; }
-  100% { opacity: 1; }
+.header-settings-btn {
+  width: 32px;
+  height: 32px;
+  font-size: 1.15rem;
+  color: var(--c-primary);
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid transparent;
+  flex-shrink: 0;
+}
+
+.header-settings-btn:hover {
+  background: var(--c-primary-dim);
+  border-color: var(--c-border);
 }
 
 /* 行動裝置 RWD (< 768px) */

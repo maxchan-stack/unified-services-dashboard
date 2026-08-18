@@ -42,6 +42,7 @@ export function initSettings() {
 
   // ── 開關抽屜 ──
   function openSettings() {
+    document.getElementById('sidebar')?.classList.remove('mobile-open');
     drawer?.classList.add('active');
     overlay?.classList.add('active');
   }

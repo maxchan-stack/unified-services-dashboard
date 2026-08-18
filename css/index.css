@@ -321,7 +321,7 @@ input:focus, select:focus, textarea:focus {
   background: rgba(18, 24, 30, 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 900;
+  z-index: 950;
   opacity: 0;
   visibility: hidden;
   transition: var(--transition);
@@ -335,8 +335,7 @@ input:focus, select:focus, textarea:focus {
 @media (max-width: 768px) {
   .modal-overlay {
     height: calc(100dvh - 60px - env(safe-area-inset-bottom, 0px));
-    /* overlay z-index 低於 drawer(1002) 但高於一般內容 */
-    z-index: 1001;
+    z-index: 950;
   }
 }
 

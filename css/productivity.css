@@ -303,16 +303,18 @@
     width: 100vw !important;
     /* 讓 drawer 底部避開底部導航列（60px）+ safe area */
     bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important;
-    /* 提高 z-index 確保在 bottom-nav 之上，使整個 drawer 層疊正確 */
-    z-index: 1002 !important;
+    /* 提高 z-index 確保在 sidebar 與 bottom-nav 之上 */
+    z-index: 1200 !important;
   }
   .drawer-body {
     /* 確保 body 區塊可以捲動，不被截斷 */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    padding-bottom: 24px;
   }
   .modal {
     width: 92vw !important;
+    z-index: 1300 !important;
   }
 }
 
