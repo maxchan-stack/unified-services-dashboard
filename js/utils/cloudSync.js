@@ -49,7 +49,7 @@ export class CloudSyncService {
     const debouncedUpload = debounce(() => this.uploadCloudData(), 2500);
 
     store.subscribe((key) => {
-      if (key === 'scratchpadContent' || key === 'radioStreamUrl') {
+      if (key === 'scratchpadContent' || key === 'radioStreamUrl' || key === 'theme') {
         this.updateStatus('⏳ 等待同步...', 'syncing');
         debouncedUpload();
       }
@@ -95,6 +95,7 @@ export class CloudSyncService {
         version: record._v,
         scratchpadContent: record.scratchpadContent ?? '',
         radioStreamUrl: record.radioStreamUrl ?? '',
+        theme: record.theme ?? '',
         isNewFormat: true
       };
     }
@@ -106,6 +107,7 @@ export class CloudSyncService {
         version: 0,
         scratchpadContent: record.scratchpadContent ?? '',
         radioStreamUrl: record.radioStreamUrl ?? '',
+        theme: record.theme ?? '',
         isNewFormat: false
       };
     }
@@ -195,6 +197,13 @@ export class CloudSyncService {
         store.set('radioStreamUrl', cloudData.radioStreamUrl);
       }
 
+      if (cloudData.theme) {
+        store.set('theme', cloudData.theme);
+        document.body.className = cloudData.theme;
+        const themeSelect = document.getElementById('select-theme');
+        if (themeSelect) themeSelect.value = cloudData.theme;
+      }
+
       const textarea = document.getElementById('scratchpad-textarea');
       if (textarea) textarea.value = cloudData.scratchpadContent;
 
@@ -282,7 +291,8 @@ export class CloudSyncService {
         _updatedAt: new Date().toISOString(),
         _deviceId: store.get('_deviceId') || 'unknown',
         scratchpadContent: localContent,
-        radioStreamUrl: store.get('radioStreamUrl') || ''
+        radioStreamUrl: store.get('radioStreamUrl') || '',
+        theme: store.get('theme') || 'theme-dark'
       };
 
       const putRes = await fetch(this.cloudStoreUrl, {

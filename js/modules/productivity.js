@@ -1,5 +1,5 @@
 import { store } from '../store.js';
-import { eventBus, formatTime } from '../utils/helpers.js';
+import { eventBus, formatTime, showToast, showConfirm } from '../utils/helpers.js';
 
 export function initProductivity() {
   // Scratchpad Drawer
@@ -29,17 +29,23 @@ export function initProductivity() {
     overlay.classList.remove('active');
   });
 
-  clearScratchpadBtn?.addEventListener('click', () => {
-    if (scratchpadTextarea && confirm('確定要清空所有筆記嗎？')) {
+  clearScratchpadBtn?.addEventListener('click', async () => {
+    if (!scratchpadTextarea) return;
+    const confirmed = await showConfirm('確定要清空所有筆記嗎？此動作無法復原。', '確定清空', '取消');
+    if (confirmed) {
       scratchpadTextarea.value = '';
       store.set('scratchpadContent', '');
+      showToast('筆記已清空', 'info');
     }
   });
 
-  copyScratchpadBtn?.addEventListener('click', () => {
-    if (scratchpadTextarea) {
-      navigator.clipboard.writeText(scratchpadTextarea.value);
-      alert('筆記內容已成功複製至剪貼簿！');
+  copyScratchpadBtn?.addEventListener('click', async () => {
+    if (!scratchpadTextarea) return;
+    try {
+      await navigator.clipboard.writeText(scratchpadTextarea.value);
+      showToast('筆記內容已複製至剪貼簿', 'success');
+    } catch {
+      showToast('複製失敗，請手動選取文字複製', 'error');
     }
   });
 
@@ -113,12 +119,12 @@ export function initProductivity() {
         ringContainer?.classList.remove('is-running');
         
         if (isWorkPhase) {
-          alert('專注時間結束！休息 5 分鐘。');
+          showToast('專注時間結束！休息 5 分鐘', 'success', 5000);
           isWorkPhase = false;
           remainingSeconds = 5 * 60;
           if (modalPhase) modalPhase.textContent = '休息時間';
         } else {
-          alert('休息結束！重新開始專注。');
+          showToast('休息結束！開始新一輪專注', 'info', 5000);
           isWorkPhase = true;
           remainingSeconds = 25 * 60;
           if (modalPhase) modalPhase.textContent = '工作時間';

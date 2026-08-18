@@ -1,7 +1,8 @@
 import { store } from '../store.js';
+import { showToast } from '../utils/helpers.js';
 
-const DEFAULT_ADMIN_SECRET = 'a8b414c024b8';
-
+// Admin Secret 不再硬編碼。
+// 使用者須在「偏好設定」中設定「佈告欄管理員授權碼」後方可使用教師/管理員功能。
 const BULLETIN_PORTALS = {
   bulletin: 'https://maxchan-stack.github.io/bulletin-board-web/bulletin.html',
   student:  'https://maxchan-stack.github.io/bulletin-board-web/index.html',
@@ -10,14 +11,20 @@ const BULLETIN_PORTALS = {
   admin:    'https://maxchan-stack.github.io/bulletin-board-web/admin.html'
 };
 
-function getPortalUrl(portalKey) {
-  let url = BULLETIN_PORTALS[portalKey] || BULLETIN_PORTALS.bulletin;
-  const secret = localStorage.getItem('bulletin_admin_secret') || DEFAULT_ADMIN_SECRET;
+function getAdminSecret() {
+  return localStorage.getItem('bulletin_admin_secret') || '';
+}
 
+function getPortalUrl(portalKey) {
   if (portalKey === 'teacher' || portalKey === 'admin') {
-    url += `?admin=${encodeURIComponent(secret)}`;
+    const secret = getAdminSecret();
+    if (!secret) {
+      // 未設定 secret，回傳 null 代表需要攔截
+      return null;
+    }
+    return BULLETIN_PORTALS[portalKey] + `?admin=${encodeURIComponent(secret)}`;
   }
-  return url;
+  return BULLETIN_PORTALS[portalKey] || BULLETIN_PORTALS.bulletin;
 }
 
 export function initBulletin() {
@@ -25,7 +32,7 @@ export function initBulletin() {
   if (!container) return;
 
   const currentTab = store.get('bulletinPortal') || 'bulletin';
-  const currentUrl = getPortalUrl(currentTab);
+  const currentUrl = getPortalUrl(currentTab) || BULLETIN_PORTALS.bulletin;
 
   container.innerHTML = `
     <div class="bulletin-wrapper">
@@ -82,6 +89,11 @@ export function initBulletin() {
 
   function switchPortal(portalKey) {
     const targetUrl = getPortalUrl(portalKey);
+
+    if (targetUrl === null) {
+      showToast('請先在「偏好設定」中設定「佈告欄管理員授權碼」，才能使用教師與管理員功能。', 'warning');
+      return;
+    }
 
     skeleton?.classList.remove('hidden');
     iframe.src = targetUrl;

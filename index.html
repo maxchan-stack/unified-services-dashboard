@@ -18,18 +18,18 @@
   <!-- Remix Icons (via CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
-  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v60) -->
-  <link rel="stylesheet" href="css/index.css?v=60">
-  <link rel="stylesheet" href="css/sidebar.css?v=60">
-  <link rel="stylesheet" href="css/header.css?v=60">
-  <link rel="stylesheet" href="css/workspace.css?v=60">
-  <link rel="stylesheet" href="css/smoothjazz.css?v=60">
-  <link rel="stylesheet" href="css/bulletin.css?v=60">
-  <link rel="stylesheet" href="css/fund.css?v=60">
-  <link rel="stylesheet" href="css/grades.css?v=60">
-  <link rel="stylesheet" href="css/island.css?v=60">
-  <link rel="stylesheet" href="css/productivity.css?v=60">
-  <link rel="stylesheet" href="css/settings.css?v=60">
+  <!-- Main CSS System (MUJI Morandi Slate Blue Theme v61) -->
+  <link rel="stylesheet" href="css/index.css?v=61">
+  <link rel="stylesheet" href="css/sidebar.css?v=61">
+  <link rel="stylesheet" href="css/header.css?v=61">
+  <link rel="stylesheet" href="css/workspace.css?v=61">
+  <link rel="stylesheet" href="css/smoothjazz.css?v=61">
+  <link rel="stylesheet" href="css/bulletin.css?v=61">
+  <link rel="stylesheet" href="css/fund.css?v=61">
+  <link rel="stylesheet" href="css/grades.css?v=61">
+  <link rel="stylesheet" href="css/island.css?v=61">
+  <link rel="stylesheet" href="css/productivity.css?v=61">
+  <link rel="stylesheet" href="css/settings.css?v=61">
 </head>
 <body class="theme-dark">
 
@@ -273,17 +273,18 @@
       <button class="close-drawer-btn" id="close-settings-btn"><i class="ri-close-line"></i></button>
     </div>
     <div class="drawer-body">
-      
+
+      <!-- 外觀主題 -->
       <div class="setting-group">
         <h4><i class="ri-palette-line"></i> 外觀主題與色彩</h4>
         <div class="field-group">
           <label for="select-theme">系統視覺色彩風格主題</label>
           <select id="select-theme">
             <optgroup label="✨ 新增風格推薦">
-              <option value="theme-obsidian-amber">極簡黑曜 · 琥珀暖金 (Obsidian & Warm Amber)</option>
-              <option value="theme-nordic-pine">北歐松針 · 鼠尾草綠 (Nordic Pine & Sage)</option>
-              <option value="theme-nebula-teal">星系曜紫 · 薄荷電光青 (Nebula Violet & Mint Teal)</option>
-              <option value="theme-japanese-linen">和風燕麥 · 焙茶米白 (Japanese Linen & Oolong)</option>
+              <option value="theme-obsidian-amber">極簡黑曜 · 琥珀暖金 (Obsidian &amp; Warm Amber)</option>
+              <option value="theme-nordic-pine">北歐松針 · 鼠尾草綠 (Nordic Pine &amp; Sage)</option>
+              <option value="theme-nebula-teal">星系曜紫 · 薄荷電光青 (Nebula Violet &amp; Mint Teal)</option>
+              <option value="theme-japanese-linen">和風燕麥 · 焙茶米白 (Japanese Linen &amp; Oolong)</option>
             </optgroup>
             <optgroup label="經典莫蘭迪">
               <option value="theme-dark" selected>莫蘭迪霧藍 · 質感灰藍夜 (Morandi Slate Blue Dark)</option>
@@ -294,10 +295,60 @@
         </div>
       </div>
 
+      <!-- AI 金鑰（Gemini API Key 不再顯示於此，改用隱性儲存提示） -->
+      <div class="setting-group">
+        <h4><i class="ri-key-2-line"></i> 佈告欄管理員授權碼</h4>
+        <p class="setting-desc">設定後，「導師發布台」與「授權碼管理」功能才可使用。此碼儲存於本機，不會上傳至雲端。</p>
+        <div class="field-group">
+          <label for="input-bulletin-secret">管理員授權碼（Admin Secret）</label>
+          <div class="input-with-btn">
+            <input type="password" id="input-bulletin-secret" placeholder="請輸入佈告欄管理員授權碼" autocomplete="off">
+            <button id="btn-toggle-bulletin-secret" class="btn btn-ghost btn-sm" title="顯示/隱藏"><i class="ri-eye-line"></i></button>
+          </div>
+          <p class="field-hint">儲存後立即生效，可隨時修改。</p>
+          <button id="btn-save-bulletin-secret" class="btn btn-primary btn-sm"><i class="ri-save-line"></i> 儲存授權碼</button>
+          <span id="bulletin-secret-status" class="key-status-text"></span>
+        </div>
+      </div>
+
+      <!-- 教材費 GAS API Key -->
+      <div class="setting-group">
+        <h4><i class="ri-wallet-3-line"></i> 教材費 GAS API Key</h4>
+        <p class="setting-desc">設定後，「214 班教材費專戶」功能才可正常使用。此 Key 儲存於本機，不會上傳至雲端。</p>
+        <div class="field-group">
+          <label for="input-fund-api-key">Google Apps Script Web App Key</label>
+          <div class="input-with-btn">
+            <input type="password" id="input-fund-api-key" placeholder="請貼上 GAS API Key（AKfycb...）" autocomplete="off">
+            <button id="btn-toggle-fund-key" class="btn btn-ghost btn-sm" title="顯示/隱藏"><i class="ri-eye-line"></i></button>
+          </div>
+          <p class="field-hint">儲存後立即生效，切換至教材費頁面即可使用。</p>
+          <button id="btn-save-fund-api-key" class="btn btn-primary btn-sm"><i class="ri-save-line"></i> 儲存 API Key</button>
+          <span id="fund-api-key-status" class="key-status-text"></span>
+        </div>
+      </div>
+
+      <!-- Gemini AI API Key -->
+      <div class="setting-group">
+        <h4><i class="ri-sparkling-line"></i> Gemini AI API Key</h4>
+        <p class="setting-desc">用於 AI 功能整合。儲存於本機 localStorage，不會上傳至雲端。</p>
+        <div class="field-group">
+          <label for="input-gemini-key">Gemini API Key</label>
+          <div class="input-with-btn">
+            <input type="password" id="input-gemini-key" placeholder="請貼上 Gemini API Key（AIza...）" autocomplete="off">
+            <button id="btn-toggle-gemini-key" class="btn btn-ghost btn-sm" title="顯示/隱藏"><i class="ri-eye-line"></i></button>
+            <button id="btn-verify-gemini" class="btn btn-secondary btn-sm"><i class="ri-wifi-line"></i> 驗證</button>
+          </div>
+          <span id="gemini-key-status" class="key-status-text"></span>
+        </div>
+      </div>
+
+      <!-- 系統備份與重置 -->
       <div class="setting-group">
         <h4><i class="ri-database-2-line"></i> 系統備份與重置</h4>
         <div class="btn-group-row">
           <button id="btn-export-config" class="btn btn-secondary btn-sm"><i class="ri-download-line"></i> 匯出設定檔</button>
+          <label for="input-import-config" class="btn btn-secondary btn-sm" style="cursor:pointer;"><i class="ri-upload-line"></i> 匯入設定檔</label>
+          <input type="file" id="input-import-config" accept=".json" style="display:none;">
           <button id="btn-reset-all" class="btn btn-ghost btn-sm text-danger"><i class="ri-refresh-line"></i> 重置全站</button>
         </div>
       </div>
@@ -308,6 +359,6 @@
   <div id="modal-overlay" class="modal-overlay"></div>
 
   <!-- JavaScript Modules -->
-  <script type="module" src="js/app.js?v=60"></script>
+  <script type="module" src="js/app.js?v=61"></script>
 </body>
 </html>

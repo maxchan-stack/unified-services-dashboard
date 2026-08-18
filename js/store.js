@@ -1,8 +1,10 @@
+import { VALID_TABS } from './constants.js';
+import { showToast, showConfirm } from './utils/helpers.js';
+
 /**
  * State & LocalStorage Store Manager
  */
 const STORAGE_KEY = 'omnihub_config_v1';
-const VALID_TABS = ['bulletin', 'fund', 'grades', 'island'];
 
 const defaultState = {
   theme: 'theme-dark',
@@ -90,13 +92,18 @@ class Store {
       window.location.reload();
       return true;
     } catch (e) {
-      alert('無效的 JSON 設定檔格式！');
+      showToast('無效的 JSON 設定檔格式，請確認檔案內容後重試。', 'error', 5000);
       return false;
     }
   }
 
-  resetAll() {
-    if (confirm('確定要重置所有本機設定與紀錄嗎？')) {
+  async resetAll() {
+    const confirmed = await showConfirm(
+      '確定要重置所有本機設定與紀錄嗎？\n此動作將清除所有設定，無法復原。',
+      '確定重置',
+      '取消'
+    );
+    if (confirmed) {
       localStorage.removeItem(STORAGE_KEY);
       window.location.reload();
     }

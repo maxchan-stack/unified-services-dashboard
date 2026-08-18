@@ -63,3 +63,71 @@ export function debounce(func, wait) {
     timeout = setTimeout(later, wait);
   };
 }
+
+// ─────────────────────────────────────────────────────
+// Toast 通知系統（非阻塞，取代 alert）
+// 用法：showToast('訊息', 'success' | 'warning' | 'error' | 'info', 持續毫秒)
+// ─────────────────────────────────────────────────────
+
+let _toastContainer = null;
+
+function getToastContainer() {
+  if (!_toastContainer) {
+    _toastContainer = document.getElementById('toast-container');
+    if (!_toastContainer) {
+      _toastContainer = document.createElement('div');
+      _toastContainer.id = 'toast-container';
+      document.body.appendChild(_toastContainer);
+    }
+  }
+  return _toastContainer;
+}
+
+export function showToast(message, type = 'info', duration = 3500) {
+  const container = getToastContainer();
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+
+  const iconMap = { success: '✓', warning: '⚠', error: '✕', info: 'ℹ' };
+  toast.textContent = `${iconMap[type] || ''} ${message}`;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add('toast-out');
+    toast.addEventListener('animationend', () => toast.remove(), { once: true });
+  }, duration);
+}
+
+// ─────────────────────────────────────────────────────
+// ConfirmModal（非阻塞，取代 confirm）
+// 用法：const confirmed = await showConfirm('確定要執行嗎？');
+// ─────────────────────────────────────────────────────
+
+export function showConfirm(message, confirmText = '確定', cancelText = '取消') {
+  return new Promise((resolve) => {
+    const backdrop = document.createElement('div');
+    backdrop.className = 'confirm-modal-backdrop';
+
+    backdrop.innerHTML = `
+      <div class="confirm-modal-box">
+        <p class="confirm-modal-message">${message}</p>
+        <div class="confirm-modal-actions">
+          <button class="btn btn-ghost btn-sm" id="_confirm-cancel">${cancelText}</button>
+          <button class="btn btn-primary btn-sm" id="_confirm-ok">${confirmText}</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(backdrop);
+
+    backdrop.querySelector('#_confirm-ok').addEventListener('click', () => {
+      backdrop.remove();
+      resolve(true);
+    });
+    backdrop.querySelector('#_confirm-cancel').addEventListener('click', () => {
+      backdrop.remove();
+      resolve(false);
+    });
+  });
+}

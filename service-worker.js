@@ -1,4 +1,4 @@
-const CACHE_NAME = 'omnihub-shell-v60';
+const CACHE_NAME = 'omnihub-shell-v61';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -16,6 +16,7 @@ const STATIC_ASSETS = [
   './css/productivity.css',
   './css/settings.css',
   './js/app.js',
+  './js/constants.js',
   './js/router.js',
   './js/store.js',
   './js/ui/sidebar.js',
@@ -38,7 +39,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[ServiceWorker] Pre-caching App Shell v58');
+      console.log('[ServiceWorker] Pre-caching App Shell v61');
       return cache.addAll(STATIC_ASSETS);
     })
   );

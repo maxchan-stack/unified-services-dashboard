@@ -1,16 +1,27 @@
 import { store } from '../store.js';
+import { showToast } from '../utils/helpers.js';
 
-const FUND_PORTALS = {
-  parent: 'https://maxchan-stack.github.io/class-fund-ledger/?view=parent&api=AKfycbwBoo653bMsvkZceaXks8x2Ul2GuFJWI5ctXQMkh3vq_YLolAerNJWIv9gRyEnOmvN_Bw',
-  teacher: 'https://maxchan-stack.github.io/class-fund-ledger/?api=AKfycbwBoo653bMsvkZceaXks8x2Ul2GuFJWI5ctXQMkh3vq_YLolAerNJWIv9gRyEnOmvN_Bw'
-};
+// GAS API Key 不再硬編碼。
+// 使用者須在「偏好設定」中設定「教材費 GAS API Key」後方可使用此功能。
+const FUND_BASE_URL = 'https://maxchan-stack.github.io/class-fund-ledger/';
+
+function getFundApiKey() {
+  return localStorage.getItem('fund_gas_api_key') || '';
+}
+
+function getFundPortalUrl(view) {
+  const apiKey = getFundApiKey();
+  if (!apiKey) return null;
+  const base = `${FUND_BASE_URL}?api=${encodeURIComponent(apiKey)}`;
+  return view === 'parent' ? base + '&view=parent' : base;
+}
 
 export function initFund() {
   const container = document.getElementById('fund-container');
   if (!container) return;
 
   const currentTab = store.get('fundPortal') || 'parent';
-  const currentUrl = FUND_PORTALS[currentTab] || FUND_PORTALS.parent;
+  const currentUrl = getFundPortalUrl(currentTab) || '';
 
   container.innerHTML = `
     <div class="fund-wrapper">
@@ -57,7 +68,11 @@ export function initFund() {
   });
 
   function switchPortal(portalKey) {
-    const targetUrl = FUND_PORTALS[portalKey] || FUND_PORTALS.parent;
+    const targetUrl = getFundPortalUrl(portalKey);
+    if (!targetUrl) {
+      showToast('請先在「偏好設定」中設定「教材費 GAS API Key」，才能使用此功能。', 'warning');
+      return;
+    }
     skeleton?.classList.remove('hidden');
     iframe.src = targetUrl;
     store.set('fundPortal', portalKey);

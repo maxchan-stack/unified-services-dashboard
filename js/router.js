@@ -1,6 +1,5 @@
+import { VALID_TABS } from './constants.js';
 import { store } from './store.js';
-
-const VALID_TABS = ['bulletin', 'fund', 'grades', 'island'];
 
 export function initRouter() {
   // Sync Sidebar Active Item with State
