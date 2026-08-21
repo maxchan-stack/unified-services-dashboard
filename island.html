@@ -3167,9 +3167,9 @@
 
             const parseSeatText = (text) => {
                 if (!text) return { no: "", name: "" };
-                const str = String(text).trim();
-                const match = str.match(/^(\d+)(?:\s*[\.\-\/\,、\s_]\s*|\s+)(.+)$/) || str.match(/^(\d+)\s+(.+)$/);
-                if (match) return { no: match[1], name: match[2].trim() };
+                const str = String(text).replace(/^\uFEFF/, "").trim();
+                const match = str.match(/^(\d+)\s*[.．、\-\/\s_　]*\s*(.+)$/);
+                if (match && match[2].trim()) return { no: match[1], name: match[2].trim() };
                 if (/^\d+$/.test(str)) return { no: str, name: "" };
                 return { no: "", name: str };
             };
@@ -3278,7 +3278,7 @@
                     const cellW = (aw - ((cols - 1) * gap)) / cols;
                     const cellH = (ah - ((rows - 1) * gap)) / rows;
                     // 寬度優先，上限 72，避免大格把外層撐爆
-                    const size = Math.max(28, Math.min(cellW, cellH, 72));
+                    const size = Math.max(36, Math.min(cellW, cellH, 96));
                     setGridStyle({
                         gridTemplateColumns: `repeat(${cols}, ${size}px)`,
                         gridTemplateRows: `repeat(${rows}, ${size}px)`,
@@ -4381,7 +4381,7 @@
                                                     ) : seat.type === 'occupied' ? (
                                                         <span className="flex flex-col items-center justify-center w-full min-h-0 px-0.5">
                                                             {no && <span className="seat-no block text-[9px] md:text-[10px] opacity-70 leading-tight font-bold">{no}</span>}
-                                                            {name && <span className="seat-name block text-xs md:text-sm leading-tight font-bold truncate max-w-full">{name}</span>}
+                                                            {name && (<span className={`seat-name block font-bold leading-tight tracking-tight text-center ${name.length > 3 ? "text-[10px] md:text-xs" : "text-xs md:text-sm"}`}>{name}</span>)}
                                                         </span>
                                                     ) : (
                                                         <span className="opacity-40 text-[10px] font-bold">{i + 1}</span>
