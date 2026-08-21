@@ -3385,7 +3385,7 @@
                 return idx;
             };
 
-            const fillGridWithList = (sortedList, { snake = false, colMajor = false } = {}) => {
+            const fillGridWithList = (sortedList, { snake = false, colMajor = false, startFromRight = false } = {}) => {
                 setSeats(prev => {
                     const newSeats = prev.map(s => ({ ...s }));
                     let indices = freeIndices(newSeats);
@@ -3397,9 +3397,11 @@
                             return (rA % 2 === 0) ? (cA - cB) : (cB - cA);
                         });
                     } else if (colMajor) {
+                        // 直欄優先：依欄號排，欄內由上至下；可選從右欄或左欄開始
                         indices.sort((a, b) => {
                             const cA = a % cols, cB = b % cols;
-                            if (cA !== cB) return cA - cB;
+                            const colOrder = startFromRight ? (cB - cA) : (cA - cB);
+                            if (colOrder !== 0) return colOrder;
                             return Math.floor(a / cols) - Math.floor(b / cols);
                         });
                     } else {
@@ -3463,7 +3465,7 @@
                 setStatusMsg('已隨機排座（優先名單避開視力保留區）');
             };
 
-            const handleSequential = () => fillGridWithList(availableStudents, { colMajor: sortDir === 'col' });
+            const handleSequential = () => fillGridWithList(availableStudents, { colMajor: sortDir === 'col-right' || sortDir === 'col-left', startFromRight: sortDir === 'col-right' });
             const handleSnake = () => fillGridWithList(availableStudents, { snake: true });
             const handleInterleave = () => {
                 const list = availableStudents;
@@ -3726,7 +3728,7 @@
                     setNamesStr(norm.join('\n'));
                     setStatusMsg(`已匯入 ${norm.length} 人`);
                     if (norm.length && confirm(`已匯入 ${norm.length} 人，要立刻「依序排座」嗎？`)) {
-                        setTimeout(() => fillGridWithList(norm.filter(s => !ignoreKeywords.some(k => s.includes(k))), { colMajor: sortDir === 'col' }), 50);
+                        setTimeout(() => fillGridWithList(norm.filter(s => !ignoreKeywords.some(k => s.includes(k))), { colMajor: sortDir === 'col-right' || sortDir === 'col-left', startFromRight: sortDir === 'col-right' }), 50);
                     }
                 };
                 if (name.endsWith('.xlsx') || name.endsWith('.xls')) {
@@ -4279,7 +4281,8 @@
                                         </div>
                                         <div className="mt-2 flex items-center gap-3 text-[11px] text-[#5b6c6a]">
                                             <label className="flex items-center gap-1 cursor-pointer"><input type="radio" name="sortDir" checked={sortDir === 'row'} onChange={() => setSortDir('row')} /> 橫列優先</label>
-                                            <label className="flex items-center gap-1 cursor-pointer"><input type="radio" name="sortDir" checked={sortDir === 'col'} onChange={() => setSortDir('col')} /> 直欄優先</label>
+                                            <label className="flex items-center gap-1 cursor-pointer"><input type="radio" name="sortDir" checked={sortDir === 'col-right'} onChange={() => setSortDir('col-right')} /> 直欄（由右欄）</label>
+                                            <label className="flex items-center gap-1 cursor-pointer"><input type="radio" name="sortDir" checked={sortDir === 'col-left'} onChange={() => setSortDir('col-left')} /> 直欄（由左欄）</label>
                                         </div>
                                     </div>
                                     <div className="sp-section">
