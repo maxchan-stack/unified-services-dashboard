@@ -75,6 +75,10 @@
           <i class="ri-community-line"></i>
           <span class="nav-label">島民行政中心</span>
         </button>
+        <button class="nav-item" data-view="cleaning" id="nav-cleaning">
+          <i class="ri-brush-3-line"></i>
+          <span class="nav-label">214 班打掃與值日生</span>
+        </button>
 
         <div class="nav-section-title">生產力工具</div>
         <button class="nav-item" id="btn-open-scratchpad">
@@ -113,8 +117,9 @@
           <h1 id="view-title" class="page-title">214 班電子佈告欄</h1>
         </div>
         <div class="header-right">
-          <select id="sheets-shortcut-select" class="sheets-shortcut-select" title="快速開啟 214 班功能對應的 Google 試算表">
-            <option value="" disabled selected>📊 雲端試算表捷徑...</option>
+          <select id="sheets-shortcut-select" class="sheets-shortcut-select" title="快速開啟 214 班功能對應的 Google 試算表與服務">
+            <option value="" disabled selected>📊 雲端服務與試算表捷徑...</option>
+            <option value="https://class-clean-schedule.pages.dev">🧹 214 班打掃與值日生系統 (Pages)</option>
             <option value="https://docs.google.com/spreadsheets/d/1p2Ii2M8dOGdBffuLe0hvE40P6qmfj4SS55uQ4_9bQrQ/edit">📌 214 電子佈告欄試算表</option>
             <option value="https://docs.google.com/spreadsheets/d/18CZv9TNJHrUBiAGPUTti2pNuDEMMXwniXU9aBs_lsyQ/edit?gid=0#gid=0">💰 214 教材費專戶試算表</option>
             <option value="https://docs.google.com/spreadsheets/d/1PEzy-SibsTw-DXUacBEn4u8jvafyxhFO3EjDgMNJ-Gw/edit?gid=0#gid=0">🎓 214 成績查詢試算表</option>
@@ -162,6 +167,13 @@
         <section id="panel-island" class="module-panel panel-island" data-module="island">
           <div class="panel-body" id="island-container">
             <!-- Island Content JS Rendered -->
+          </div>
+        </section>
+
+        <!-- Module Panel 5: 214 班打掃與值日生系統 -->
+        <section id="panel-cleaning" class="module-panel panel-cleaning" data-module="cleaning" style="display: none; height: 100%; width: 100%;">
+          <div class="panel-body" id="cleaning-container" style="height: 100%; width: 100%; padding: 0;">
+            <!-- Cleaning Module JS Rendered -->
           </div>
         </section>
 
@@ -362,6 +374,6 @@
   <div id="modal-overlay" class="modal-overlay"></div>
 
   <!-- JavaScript Modules -->
-  <script type="module" src="js/app.js?v=64"></script>
+  <script type="module" src="js/app.js?v=65"></script>
 </body>
 </html>

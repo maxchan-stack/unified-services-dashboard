@@ -1,4 +1,4 @@
-const CACHE_NAME = 'omnihub-shell-v64';
+const CACHE_NAME = 'omnihub-shell-v65';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -27,6 +27,7 @@ const STATIC_ASSETS = [
   './js/modules/fund.js',
   './js/modules/grades.js',
   './js/modules/island.js',
+  './js/modules/cleaning.js',
   './js/modules/cross-integration.js',
   './js/modules/productivity.js',
   './js/utils/settings.js',

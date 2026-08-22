@@ -1,6 +1,5 @@
 import { store } from '../store.js';
-
-const VALID_TABS = ['bulletin', 'fund', 'grades', 'island'];
+import { VALID_TABS } from '../constants.js';
 
 export function initWorkspace() {
   const workspace = document.getElementById('workspace');

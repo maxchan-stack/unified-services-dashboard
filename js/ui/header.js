@@ -10,7 +10,8 @@ export function initHeader() {
         bulletin: '214 班電子佈告欄',
         fund: '214 班教材費專戶',
         grades: '214 班學生成績查詢',
-        island: '島民行政中心'
+        island: '島民行政中心',
+        cleaning: '214 班打掃排班與值日生系統'
       };
       if (pageTitle) pageTitle.textContent = titleMap[state.activeTab] || '行動整合頁面';
     }
